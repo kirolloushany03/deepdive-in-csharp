@@ -101,36 +101,36 @@ Console.WriteLine(ourstring);
 PrimerOnClasses_refence_AndValueTypes.RuncExamples();*/
 
 //=============================================================
-
-/*//Enums are value types
+/*//enums
+//Enums are value types
 //the better to use enums in situation that you will not change the values of it
-//can we change the enums --> no*/
-/*
- * enums we can call are in fact a numeric type --> that we can cast it as an integer
- * but we can not cast enum as string
- */
+//can we change the enums --> no
 
-/*//so here we can cast the inum as integer
+*enums we can call are in fact a numeric type --> that we can cast it as an integer
+ * but we can not cast enum as string
+ 
+
+//so here we can cast the inum as integer
 using System.Runtime.Serialization;
 
 int monday = (int)DaysOfWeek.monday;
 
-*//*//but we can not cast it as string
-//string monday = (string)DaysOfWeek.monday; //can not convert daysofweek to string*/
+//but we can not cast it as string
+//string monday = (string)DaysOfWeek.monday; //can not convert daysofweek to string
 
-/*//and this the confucing part that when we wrte enums to the console
-//they look like stings!*//*
+//and this the confucing part that when we wrte enums to the console
+//they look like stings!
 Console.WriteLine($"enum value directly: {DaysOfWeek.monday}");
 Console.WriteLine($"enum value casted to int: {(int)DaysOfWeek.monday}");
 
-*//*//but we can go from an << enum to a string >>
-//so we need to use the ToString() Method to do that*//*
+//but we can go from an << enum to a string >>
+//so we need to use the ToString() Method to do that
 string mondaystring = DaysOfWeek.monday.ToString();
 Console.WriteLine($"this the string representation of it -->  {mondaystring} --type--> {mondaystring.GetType()}");
 
-*//*//and to go from << string to enum >> we need parsing
+//and to go from << string to enum >> we need parsing
 //we need to use Enum.Parse and this need the enum type and sting value
-//also we have another variabion in mondayenum2 with genierics with <>*//*
+//also we have another variabion in mondayenum2 with genierics with <>
 Console.WriteLine(DaysOfWeek.Friday.GetType());
 
 DaysOfWeek Fridayenum = (DaysOfWeek)Enum.Parse(typeof(DaysOfWeek), "Friday");
@@ -144,14 +144,14 @@ DaysOfWeek mondayenum3;
 bool parssuccesed = Enum.TryParse("monday", out mondayenum3);
 Console.WriteLine($"Enum {(parssuccesed ? "was parsed" : "was not parsed")}: {mondayenum3}");
 
-*//*//so why here still see sunday printed even the  enum was not sucesseful
+//so why here still see sunday printed even the  enum was not sucesseful
 // and this becasue the default numeric value of the enum is 0
-// and sunday is also assigned to the numeric value 0*//*
+// and sunday is also assigned to the numeric value 0
 bool parssuccesed2 = Enum.TryParse("kiro", out mondayenum3);
 Console.WriteLine($"Enum {(parssuccesed2 ? "was parsed" : "was not parsed")}: {mondayenum3}");
 
-*//*//and if we changed to dayofweek2 and here we jsut set the numeric values form 1 -7
-//still will get not parsed and numeric value 0*//*
+//and if we changed to dayofweek2 and here we jsut set the numeric values form 1 -7
+//still will get not parsed and numeric value 0
 DaysofWeek2 mondayenum4;
 bool parssuccesed4 = Enum.TryParse("kiro", out mondayenum4);
 Console.WriteLine($"Enum for mondayenum4 {(parssuccesed4 ? "was parsed" : "was not parsed")}: {mondayenum4}");
@@ -163,14 +163,14 @@ Console.WriteLine("print values with casting");
 
 foreach (DaysOfWeek day in Enum.GetValues(typeof(DaysOfWeek)))
 {
-    Console.WriteLine($"Enum value: {(int)day} and type: {day.GetType()}");
+Console.WriteLine($"Enum value: {(int)day} and type: {day.GetType()}");
 }
 
 Console.WriteLine("\nprint values without casting");
 
 foreach (DaysOfWeek day in Enum.GetValues(typeof(DaysOfWeek)))
 {
-    Console.WriteLine($"Enum value: {day} and type: {day.GetType()}");
+Console.WriteLine($"Enum value: {day} and type: {day.GetType()}");
 }
 
 Console.WriteLine("\nprint all the names of the enum string");
@@ -178,11 +178,11 @@ Console.WriteLine("\nprint all the names of the enum string");
 Console.WriteLine("\nAll Enum Names");
 foreach (string day in Enum.GetNames(typeof(DaysOfWeek)))
 {
-    Console.WriteLine($"Enum Name: {day} and type: {day.GetType()}");
+Console.WriteLine($"Enum Name: {day} and type: {day.GetType()}");
 }
 Console.WriteLine("\n");
-*//*//wierd behavior where we can techincally cast an int to an enum
-//even if the int desn;t correspont to a valid enum value!*//*
+//wierd behavior where we can techincally cast an int to an enum
+//even if the int desn;t correspont to a valid enum value!
 DaysOfWeek invalidday = (DaysOfWeek)8;
 Console.WriteLine($"Invalid Enum Value: {invalidday} type of it {invalidday.GetType()}");
 
@@ -198,7 +198,7 @@ Console.WriteLine($"canRead : {canRead}");
 Console.WriteLine($"canWrite : {canWrite}");
 Console.WriteLine($"canExcute : {canExcute}");
 
-*//* enums also be used as "flags"
+enums also be used as "flags"
 using bitwise opertors
 why we assign the numbers like this  0 1 2 4 this numbering called the power of 2
 and we do this to the number to dont get confused when we use opertors
@@ -207,30 +207,30 @@ in the first one if we jsut made 1 + 2 (read + write) this will give us 3 but 3 
 so the computer will get confused which one to make the two choises read + write or do excute
 thats why we do it power of 2
 also we have all the freedom to do what we want and assign  what we want
-*//*
+
 [Flags]
 enum permissions
-{ 
-    None     = 0,
-    read     = 1,
-    write    = 2,
-    Excute   = 4
+{
+    None = 0,
+    read = 1,
+    write = 2,
+    Excute = 4
 }
 
 
 enum DaysOfWeek
-{ 
-    sunday, 
-    monday, 
-    tuesday, 
-    wednesday, 
-    thursday, 
-    Friday, 
+{
+    sunday,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    Friday,
     saturday
-}  
+}
 
 //we can also define the enums like this in another way
-enum DaysofWeek2 
+enum DaysofWeek2
 {
     sunday = 1,
     monday = 2,
@@ -241,6 +241,132 @@ enum DaysofWeek2
     saturday = 7
 }*/
 
-using DeepDive_In_C_;
+/*using DeepDive_In_C_;
 
-Enums.run_enums();
+Enums.run_enums();*/
+
+
+//=============================================================
+
+//begin in struct
+//it is a value type
+/*
+ * look like calss, 
+ * also have a construcotor
+ * 🏗️ Constructor Difference:
+ * When you define a constructor with parameters in a class, 
+ *  the default parameterless constructor disappears ❌.
+
+ * But in a struct, even if you define a constructor with parameters, 
+ *  the default parameterless constructor still exists ✅.
+ */
+
+//example of a struct
+using System.Security.Cryptography.X509Certificates;
+
+
+
+
+
+// so when you just pass the class so you give them the refrence which can be controlled by sth else
+//but when you pass the struct it makes copy of the struct 
+
+//here is an exmaple of astruct being copied when passed to a method
+
+void DoSomethingWithPoint(Point p)
+{
+    p.X = 111;
+    p.Y = 123;
+}
+
+var ourpoint = new Point()
+{
+    X = 124,
+    Y = 145
+};
+
+Console.WriteLine(ourpoint.GetType()); // so the type of it is point
+
+Console.WriteLine($"ourpoint before Dosomethingwithpoint: " + 
+    $"{ourpoint.X}, {ourpoint.Y}");
+
+DoSomethingWithPoint(ourpoint);
+
+Console.WriteLine($"ourpoint after Dosomethingwithpoint: " +
+    $"{ourpoint.X}, {ourpoint.Y}");
+
+/*
+ * 👆👆 and we got here the same values and this because the
+ * struct value type bass copy of it not the original one 
+*/
+
+void DoSomethingWithPointWithProperties(PointWithProperties p)
+{
+    p.X = 111;
+    p.Y = 123;
+}
+
+var ourpointWithProb = new PointWithProperties()
+{
+    X = 124,
+    Y = 145
+};
+
+Console.WriteLine(ourpointWithProb.GetType()); // so the type of it is point
+
+Console.WriteLine($"ourpointWithProb before DoSomethingWithPointWithProperties: " +
+    $"{ourpointWithProb.X}, {ourpointWithProb.Y}");
+
+DoSomethingWithPointWithProperties(ourpointWithProb);
+
+Console.WriteLine($"ourpointWithProb after DoSomethingWithPointWithProperties: " +
+    $"{ourpointWithProb.X} ,  {ourpointWithProb.Y}");
+
+//-------------------tying that the two constructor will work // so here what 
+var PointWithTwoConstructor = new PointWithConstructor(3,4);
+
+Console.WriteLine($"this x from struct PointWithConstructor {PointWithTwoConstructor.X}" +
+    $" and this the Y from struct PointWithConstructor {PointWithTwoConstructor.Y}");
+
+
+
+public struct Point
+{
+    public int X;
+    public int Y;
+}
+//same struct but with properties
+public struct PointWithProperties
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+
+//struct with constructor
+public struct PointWithConstructor
+{
+    public PointWithConstructor()
+    {
+        Console.WriteLine("hellow from the default");
+    }
+    public PointWithConstructor(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+
+public struct PointWithMethod
+{
+    public int X;
+    public int Y;
+
+    public void Move(int x, int y)
+    {
+        X += x;
+        Y += y;
+    }
+}
