@@ -277,8 +277,7 @@ Enums.run_enums();*/
 //but when you pass the struct it makes copy of the struct 
 
 //here is an exmaple of astruct being copied when passed to a method
-
-void DoSomethingWithPoint(Point p)
+/*void DoSomethingWithPoint(Point p)
 {
     p.X = 111;
     p.Y = 123;
@@ -298,14 +297,14 @@ Console.WriteLine($"ourpoint before Dosomethingwithpoint: " +
 DoSomethingWithPoint(ourpoint);
 
 Console.WriteLine($"ourpoint after Dosomethingwithpoint: " +
-    $"{ourpoint.X}, {ourpoint.Y}");
+    $"{ourpoint.X}, {ourpoint.Y}");*/
 
 /*
  * 👆👆 and we got here the same values and this because the
  * struct value type bass copy of it not the original one 
 */
 
-void DoSomethingWithPointWithProperties(PointWithProperties p)
+/*void DoSomethingWithPointWithProperties(PointWithProperties p)
 {
     p.X = 111;
     p.Y = 123;
@@ -331,11 +330,20 @@ Console.WriteLine($"ourpointWithProb after DoSomethingWithPointWithProperties: "
 var PointWithTwoConstructor = new PointWithConstructor(3,4);
 
 Console.WriteLine($"this x from struct PointWithConstructor {PointWithTwoConstructor.X}" +
-    $" and this the Y from struct PointWithConstructor {PointWithTwoConstructor.Y}");
+    $" and this the Y from struct PointWithConstructor {PointWithTwoConstructor.Y}");*/
+/*
+    because structs can look like classes, it can be
+    confusing when to use a struct and when to use a class
+    here are some guidelines:
+    -use a struct when you have a small, simple object
+    that you want to pass by value
+    - use a struct when you want to avoid the overhead
+    of heap allocation, garbage collecting, etc ...
+    I try to think about very primative things like a
+    Point, or a Color, or a Rectangle, or other geometric things
+*/
 
-
-
-public struct Point
+/*public struct Point
 {
     public int X;
     public int Y;
@@ -374,4 +382,6 @@ public struct PointWithMethod
         X += x;
         Y += y;
     }
-}
+}*/
+
+
