@@ -259,11 +259,16 @@ Enums.run_enums();*/
 
  * But in a struct, even if you define a constructor with parameters, 
  *  the default parameterless constructor still exists ✅.
+ *  
+ *  
+ *  also the struct is stored in the stack and this also a big diffrence
+ *  as the stack is faster than the heap as it dont need garbage collector 
+ *  so this will beuseful if you have things small and need faster pefromance than clases
  */
 
 //example of a struct
-using System.Security.Cryptography.X509Certificates;
-
+/*
+ */
 
 
 
