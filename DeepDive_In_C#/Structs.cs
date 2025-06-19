@@ -57,6 +57,7 @@ namespace DeepDive_In_C_
         // 📍 Example: Struct copy behavior when passed to a method 👇
         public static void RunStructs_Exersices()
         {
+            Console.OutputEncoding = Encoding.UTF8; //adding emojies
             void DoSomethingWithPoint(Point p)
             {
                 p.X = 111;
