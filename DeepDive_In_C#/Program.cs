@@ -385,3 +385,6 @@ public struct PointWithMethod
 }*/
 
 
+using DeepDive_In_C_;
+
+Structs.RunStructs_Exersices();
