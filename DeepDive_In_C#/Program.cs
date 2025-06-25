@@ -385,6 +385,124 @@ public struct PointWithMethod
 }*/
 
 
-using DeepDive_In_C_;
+/*using DeepDive_In_C_;
 
-Structs.RunStructs_Exersices();
+Structs.RunStructs_Exersices();*/
+
+//==============================================
+//the problem with equality
+/*
+ * so we can say here 
+ * what is the problem here ?
+ *      so the probelm here when you work with both in same project staruct(value type) and classes(refrecne type)
+ * the probelm that you can get confused by the two behaviours between the value and refrence type
+ * so the solution here is to override the behaviour of the equality to make the refrence type (class)
+ * to behave likethe value type and this by override three things
+ *      1. the Equals method so we can check the content instead of the refrences(memory addresses)
+ *                  But that’s only half the story
+ *      2. also we will change the the GetHashCode() method for the 
+ *              objects go into hash-based collections like Dictionary or HashSet
+ *      3. last thing is the operaotr == != to make it to use our Equals method instead of the default one
+        \
+
+so this what the people try to do jsut for clarifiying to use we dont have to do that
+next one will be the solution
+ */
+
+//lets look at class equality
+var myclass1 = new Myclass { NumericValue = 123, StringValue = "ABC" };
+var myclass2 = new Myclass { NumericValue = 123, StringValue = "ABC" };
+Console.WriteLine("is myclasss1 is equal to myclass2");
+Console.WriteLine(myclass1 == myclass2);
+Console.WriteLine(myclass1.Equals(myclass2));
+Console.WriteLine(object.Equals(myclass1, myclass2));
+
+
+var mystruct1 = new Mystruct {NumericValue = 123, StringValue = "soso" };
+var mystruct2 = new Mystruct {NumericValue = 123, StringValue = "soso" };
+Console.WriteLine("is mystrcut1 is equal to mystruct2");
+//Console.WriteLine( mystruct1 == mystruct2); //you need to sepcify the specific propbety
+Console.WriteLine(mystruct1.Equals(mystruct2));
+Console.WriteLine(object.Equals(mystruct1, mystruct2));
+
+
+//after modifiying the behaviour of Equals to make the behaviour of the refrence type liekthe value type
+var myClassWithEquality1 = new MyclassWithEquality { NumericValue = 123, StringValue = "koko" };
+var myClassWithEquality2 = new MyclassWithEquality { NumericValue = 123, StringValue = "koko" };
+
+Console.WriteLine("myClassWithEquality1 is equal to myClassWithEquality2");
+Console.WriteLine(myClassWithEquality1 == myClassWithEquality2);
+Console.WriteLine(myClassWithEquality1.Equals(myClassWithEquality2));
+Console.WriteLine(object.Equals(myClassWithEquality1, myClassWithEquality2));
+
+// so we can modify the behavior of the classes so it can compare the values insteead of the refence only
+var myClassWithEqualityAntOperator1 = new MyclassWithEqualityAndOperator { NumericValue= 123 , StringValue = "fofo"};
+var myClassWithEqualityAntOperator2 = new MyclassWithEqualityAndOperator { NumericValue= 123 , StringValue = "fofo"};
+Console.WriteLine("is myClassWithEqualityAntOperator1 is queal to myClassWithEqualityAntOperator2");
+Console.WriteLine(myClassWithEqualityAntOperator1 == myClassWithEqualityAntOperator2);
+Console.WriteLine(myClassWithEqualityAntOperator1.Equals(myClassWithEqualityAntOperator2));
+Console.WriteLine(object.Equals(myClassWithEqualityAntOperator1, myClassWithEqualityAntOperator2));
+
+
+public class MyclassWithEqualityAndOperator
+{ 
+    public int NumericValue { get; set; }
+    public string StringValue { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        var other = (MyclassWithEqualityAndOperator)obj;
+        return NumericValue == other.NumericValue && StringValue == other.StringValue;
+    }
+
+    public override int GetHashCode()
+    {
+        return NumericValue.GetHashCode() ^ StringValue.GetHashCode();
+    }
+
+    public static bool operator ==(MyclassWithEqualityAndOperator left, MyclassWithEqualityAndOperator right)
+    { 
+        return left.Equals(right);
+    }
+    public static bool operator !=(MyclassWithEqualityAndOperator left, MyclassWithEqualityAndOperator right)
+    { 
+        return !left.Equals(right);
+    }
+}
+
+
+public class MyclassWithEquality
+{
+    public string StringValue { get; set; }
+    public int NumericValue { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType()) 
+            return false;
+
+        var other = (MyclassWithEquality)obj; //🎩 This turns the object into a real MycalssWithEquality type
+
+        return NumericValue == other.NumericValue && StringValue == other.StringValue;
+    }
+
+    public override int GetHashCode()
+    {
+        return NumericValue.GetHashCode() ^ StringValue.GetHashCode();
+    }
+}
+
+public class Myclass
+{ 
+    public int NumericValue { get; set; }
+    public string StringValue { get; set; }
+}
+
+public struct Mystruct
+{
+    public int NumericValue { get; set; }
+    public string StringValue { get; set; }
+}
