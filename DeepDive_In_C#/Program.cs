@@ -410,7 +410,7 @@ next one will be the solution
  */
 
 //lets look at class equality
-var myclass1 = new Myclass { NumericValue = 123, StringValue = "ABC" };
+/*var myclass1 = new Myclass { NumericValue = 123, StringValue = "ABC" };
 var myclass2 = new Myclass { NumericValue = 123, StringValue = "ABC" };
 Console.WriteLine("is myclasss1 is equal to myclass2");
 Console.WriteLine(myclass1 == myclass2);
@@ -506,3 +506,4 @@ public struct Mystruct
     public int NumericValue { get; set; }
     public string StringValue { get; set; }
 }
+*/
