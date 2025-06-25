@@ -28,6 +28,9 @@ namespace DeepDive_In_C_
             // 🔸 You don’t always need to do this, but it helps avoid bugs.
             // ⚠️ Overriding Equals, GetHashCode, and operators manually is powerful but super error-prone.
             // A tiny mistake can lead to unexpected behavior in collections or comparisons.
+            // and the overriding will get more complex if you get into to add a list  or 
+            // more complexobject ath has class  with another class as a proberty
+            // so dont override
 
 
 
