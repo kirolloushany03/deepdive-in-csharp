@@ -26,6 +26,9 @@ namespace DeepDive_In_C_
             // 3️⃣ Overload `==` and `!=` → So they use your `Equals()` logic.
             //
             // 🔸 You don’t always need to do this, but it helps avoid bugs.
+            // ⚠️ Overriding Equals, GetHashCode, and operators manually is powerful but super error-prone.
+            // A tiny mistake can lead to unexpected behavior in collections or comparisons.
+
 
 
             // 🔍 Default class equality
