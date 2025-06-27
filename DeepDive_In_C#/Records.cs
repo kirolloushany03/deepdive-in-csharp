@@ -12,6 +12,7 @@ namespace DeepDive_In_C_
         {
             Console.OutputEncoding = Encoding.UTF8;
             // ✅ This example explores how records behave with value and reference types in C#
+            //and also the records is really great to be used as a DTO data transfer object
 
             // 1️⃣ Init-only properties using record with object initializer
             MyRecord myrecord1 = new(123, "ABC");
