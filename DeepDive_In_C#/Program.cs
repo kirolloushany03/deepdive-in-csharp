@@ -517,7 +517,7 @@ ProblemWithEquality.Run();*/
 //  (problem between the refrence and value type equlaity)
 //record is refrence type and dealing with the value type results
 
-MyRecord myrecord1 = new(123, "ABC");
+/*MyRecord myrecord1 = new(123, "ABC");
 
 MyRecord2 myrecord2 = new()
 {
@@ -554,7 +554,7 @@ Console.WriteLine(recordC);
 
 //we can also decostruct the record in to its properties
 //why we use the decostruct
-/*
+*//*
  * ✅ Use Case: Deconstruction in Records
  *
  * 1. Simplified Property Access:
@@ -575,7 +575,7 @@ Console.WriteLine(recordC);
  *
  * 5. Readability & Immutability:
  *    - Enhances readability and works naturally with record immutability.
- */
+ *//*
 var (recValue, recString) = recordA;
 Console.WriteLine("\nthis from the deconstruct of the record A");
 Console.WriteLine(recValue);
@@ -591,10 +591,10 @@ newone.Extraproperty = "kk is the best";
 Console.WriteLine($"stringvalue: {newone.StringValue} , intvalue: {newone.NumericValue}, property:{newone.Extraproperty}");
 
 
-/*
+*//*
  * if neded we can mix in th thinks liek additional properties 
  * that are not just form the posional ones on the constructor
- */
+ *//*
 public record MyRecordWithExtraProperties(
     int NumericValue,
     string StringValue)
@@ -610,11 +610,11 @@ public record MyRecordWithExtraProperties(
 
 //(string recstring, int recvalue) = recordA; // will not compile
 
-/*
+*//*
  * records can also be defined as a structs which means they'll 
  * will be on the stacck instead of the heap and this can be useful for 
  * things for performance 
- */
+ *//*
 
 public record struct MyRecordStruct(
     int NumericValue,
@@ -633,3 +633,14 @@ public record MyRecord2
     public int NumbericValue { get; init; }
     public string stringvalue { get; init; }
 }
+*/
+
+
+//========================================================================
+using DeepDive_In_C_;
+
+//just this without static class
+Records tryit = new();
+tryit.RunRecords();
+
+//and this with static class
