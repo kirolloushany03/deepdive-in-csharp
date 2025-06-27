@@ -507,6 +507,129 @@ public struct Mystruct
     public string StringValue { get; set; }
 }
 */
-using DeepDive_In_C_;
+/*using DeepDive_In_C_;
 
-ProblemWithEquality.Run();
+ProblemWithEquality.Run();*/
+
+
+//====================================================================================
+//records the solution of the previous problem
+//  (problem between the refrence and value type equlaity)
+//record is refrence type and dealing with the value type results
+
+MyRecord myrecord1 = new(123, "ABC");
+
+MyRecord2 myrecord2 = new()
+{
+    NumbericValue = 123,
+    stringvalue = "ABC"
+};
+
+Console.WriteLine(myrecord2);
+
+
+//not the both casese we cannot change the propetires
+//becaue the they are both init only:
+//myrecord2.stringvalue = "kkk"; // will not compile
+//myrecord2.NumbericValue= 1456; //will not compile  and this becaue the init
+
+
+//how the eqality will works with the record  ?
+MyRecord recordA = new(123, "ABC");
+MyRecord recordB = new(123, "ABC");
+Console.WriteLine("is recordA is equal to recordB");
+Console.WriteLine(recordA == recordB); //true
+Console.WriteLine(recordA.Equals(recordB)); //true
+Console.WriteLine(object.Equals(recordA, recordB)); //true
+
+
+//we can use the "with "keyword to create new record
+// with the same values as the original , but with some changes
+
+MyRecord recordC = recordA with {NumericValue = 1258 };
+
+Console.WriteLine(recordA);
+Console.WriteLine(recordB);
+Console.WriteLine(recordC);
+
+//we can also decostruct the record in to its properties
+//why we use the decostruct
+/*
+ * ✅ Use Case: Deconstruction in Records
+ *
+ * 1. Simplified Property Access:
+ *    - Easily extract values without dot notation clutter.
+ *    - Example: var (name, age) = person;
+ *
+ * 2. LINQ Integration:
+ *    - Makes projection and filtering more elegant in Select/Where.
+ *    - Example: people.Select(p => { var (n, _) = p; return n; });
+ *
+ * 3. Pattern Matching:
+ *    - Deconstruct directly in switch expressions or match patterns.
+ *    - Example: person switch { ("Alice", 25) => "Matched!", _ => "Default" }
+ *
+ * 4. Clean API/Controller Logic:
+ *    - Deconstruct DTOs in minimal APIs or MVC controllers.
+ *    - Example: var (username, password) = loginRequest;
+ *
+ * 5. Readability & Immutability:
+ *    - Enhances readability and works naturally with record immutability.
+ */
+var (recValue, recString) = recordA;
+Console.WriteLine("\nthis from the deconstruct of the record A");
+Console.WriteLine(recValue);
+Console.WriteLine(recString);
+
+
+
+MyRecordWithExtraProperties newone = new(123, "kkk");
+Console.WriteLine($"stringvalue: {newone.StringValue} , intvalue: {newone.NumericValue}, property:{newone.Extraproperty}");
+
+newone.Extraproperty = "kk is the best";
+
+Console.WriteLine($"stringvalue: {newone.StringValue} , intvalue: {newone.NumericValue}, property:{newone.Extraproperty}");
+
+
+/*
+ * if neded we can mix in th thinks liek additional properties 
+ * that are not just form the posional ones on the constructor
+ */
+public record MyRecordWithExtraProperties(
+    int NumericValue,
+    string StringValue)
+{
+    public string Extraproperty { get; set; }
+}
+
+
+
+
+//in the deconstrct we have to postion the order
+//  based on the order fo the probperties if not will not wrok
+
+//(string recstring, int recvalue) = recordA; // will not compile
+
+/*
+ * records can also be defined as a structs which means they'll 
+ * will be on the stacck instead of the heap and this can be useful for 
+ * things for performance 
+ */
+
+public record struct MyRecordStruct(
+    int NumericValue,
+    string StringValue);
+
+
+
+public record MyRecord(
+    int NumericValue,
+    string stringvalue
+    );
+
+//so th init make the proeperties as immutable
+public record MyRecord2
+{ 
+    public int NumbericValue { get; init; }
+    public string stringvalue { get; init; }
+}
