@@ -637,11 +637,11 @@ public record MyRecord2
 
 
 //========================================================================
-using DeepDive_In_C_;
+/*using DeepDive_In_C_;
 
 //just this without static class
-/*Records tryit = new();
-tryit.RunRecords();*/
+*//*Records tryit = new();
+tryit.RunRecords();*//*
 
 //and this with static class
-Records.RunRecords();
+Records.RunRecords();*/
