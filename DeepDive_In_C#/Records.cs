@@ -10,7 +10,7 @@ namespace DeepDive_In_C_
     {
         public static void RunRecords()
         {
-
+            Console.OutputEncoding = Encoding.UTF8;
             // ✅ This example explores how records behave with value and reference types in C#
 
             // 1️⃣ Init-only properties using record with object initializer
