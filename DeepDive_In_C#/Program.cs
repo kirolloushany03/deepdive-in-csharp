@@ -652,7 +652,7 @@ Records.RunRecords();*/
 //c# don't allow mulitple inhertence only allowing one 
 
 
-BMW car1 = new();
+/*BMW car1 = new();
 Console.WriteLine(car1.DoorCount);
 
 Car BMWcar = new Car() {DoorCount = 4 };
@@ -704,4 +704,11 @@ public class Bike : Vehicle
 }
 
 public class Plane: Vehicle
-{ }
+{ }*/
+
+
+
+//==================
+using DeepDive_In_C_;
+
+Inheritance.Run_inheritcance();
