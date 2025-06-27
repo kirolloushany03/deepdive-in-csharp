@@ -8,7 +8,7 @@ namespace DeepDive_In_C_
 {
     internal class Records
     {
-        public  void RunRecords()
+        public static void RunRecords()
         {
             Console.OutputEncoding = Encoding.UTF8;
             // ✅ This example explores how records behave with value and reference types in C#
