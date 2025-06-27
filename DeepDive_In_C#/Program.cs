@@ -645,3 +645,63 @@ tryit.RunRecords();*//*
 
 //and this with static class
 Records.RunRecords();*/
+
+
+//========================================================================
+//welcome again to the oop
+//c# don't allow mulitple inhertence only allowing one 
+
+
+BMW car1 = new();
+Console.WriteLine(car1.DoorCount);
+
+Car BMWcar = new Car() {DoorCount = 4 };
+Car coupe = new () { DoorCount  = 2};
+Truck PickupTruck = new () { DoorCount  = 2};
+Bike bike = new Bike();
+
+BMWcar.OpenDoors();
+coupe.OpenDoors();
+PickupTruck.OpenDoors();
+bike.OpenDoors();
+
+public class Vehicle
+{ 
+    public int DoorCount { get; init; }
+
+    //gettype get teh specific type of the instance so i can see where i come from specifcally
+    public void OpenDoors()
+    {
+        Console.WriteLine(
+            $"{GetType().Name} opening {DoorCount} doors!");
+    }
+}
+
+public class Automobile : Vehicle
+{ }
+
+public class Car : Automobile
+{ }
+
+public class BMW : Car
+{
+    public BMW()
+    {
+        DoorCount = 4;
+    }
+}
+public class Truck : Automobile
+{ }
+public class Van : Automobile
+{ }
+
+public class Bike : Vehicle
+{
+    public Bike() 
+    {
+        DoorCount = 0;
+    }
+}
+
+public class Plane: Vehicle
+{ }
