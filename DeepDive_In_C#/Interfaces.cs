@@ -149,7 +149,7 @@ namespace DeepDive_In_C_
         public class Room : IHasDoors
         {
             public readonly bool[] _doors;
-
+            //instantiate the size of the array
             public Room(int numberOfDoors)
             {
                 _doors = new bool[numberOfDoors];
@@ -179,6 +179,8 @@ namespace DeepDive_In_C_
                 Console.WriteLine($"     Status: {string.Join(",", _doors)}");
                 return _doors[doorIndex];
             }
+            //another way to impemnt IsDoorOpen
+
         }
 
         // ======================= 🏍️ MOTORCYCLE CLASS =======================
