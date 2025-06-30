@@ -162,7 +162,7 @@ namespace DeepDive_In_C_
                 _doors[doorIndex] = true;
                 Console.WriteLine($"Door {doorIndex} is open ✅");
                 Console.WriteLine($"     Status: {string.Join(",", _doors)}");
-                Console.WriteLine(GetType());
+                //Console.WriteLine(GetType());
             }
 
             public void CloseDoors(int doorIndex)
