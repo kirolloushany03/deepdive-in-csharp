@@ -709,6 +709,231 @@ public class Plane: Vehicle
 
 
 //==================
-using DeepDive_In_C_;
+/*using DeepDive_In_C_;
 
-Inheritance.Run_inheritcance();
+Inheritance.Run_inheritcance();*/
+
+//=====================================================================
+// oop - interfaces
+//just a defeinition of how we would interact with something / not the implementation
+// dont get to pick and choose i need to implment all of it
+
+/* why to use intefaces ?
+ * what is the problem it solving?
+ * why we do it in our code instead of doing the methods dirctly
+ */
+//you can inhert from multiple interfaces
+
+using System.Security.Cryptography.X509Certificates;
+
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+Motorcycle motorcycle = new();
+motorcycle.StartEngine();
+Console.WriteLine(motorcycle.IsEngineRunning);
+
+//just small thing to try to hack 😂 the IsEngineRunning to set it outside the class
+//motorcycle.IsEngineRunning = flase; // this will fail because will give error
+                                      //"The property or indexer 'Motorcycle.IsEngineRunning'
+                                      //cannot be used in this context
+                                      //because the set accessor is inaccessible"
+motorcycle.StopEngine();
+Console.WriteLine(motorcycle.IsEngineRunning);
+
+motorcycle.StopEngine();
+Console.WriteLine(motorcycle.IsEngineRunning);
+
+//just to have the idea casting it to the class to interface implcit
+//and vice versa will be  so we need to explicit casting it
+IMotorized motorized = motorcycle; //this part actually happen in the backend using the dependcy injection 
+Motorcycle motocycle2 = (Motorcycle)motorized; // of course iwll not do that but we can do it in better way
+
+
+/*
+ 🤔 If multiple classes implement IHasDoosrs,
+     how do we pick which one gets used?
+
+ ✅ We choose at creation time using 'new Room(...)'
+     or 'new Spaceship(...)'—that’s where control happens.
+
+ 🧠 The code only depends on the interface, but actual
+     behavior comes from the class we create with 'new'.
+
+ ⚙️ In real projects, this is often handled automatically
+     using Dependency Injection (DI) containers.
+*/
+IHasDoosrs doors = new Room(3);
+
+doors.OpenDoors(1);
+doors.CloseDoors(2);
+doors.IsDoorOpen(0);
+
+
+Console.WriteLine("======================car =====================");
+Car coupe = new(2);
+Car sedan  = new(4);
+
+
+
+
+void TestIgnition(IMotorized motorized)
+{
+    motorized.StartEngine();
+    Console.WriteLine($"Engine is running: {motorized.IsEngineRunning}");
+    motorized.StopEngine();
+    Console.WriteLine($"Engine is running: {motorized.IsEngineRunning}");
+}
+void TestDoors(IHasDoosrs hasDoosrs)
+{
+    for (int i = 0; i < hasDoosrs.NumberOfDoors; i++)
+    {
+        hasDoosrs.OpenDoors(i);
+        Console.WriteLine($"Door {i} is open: {hasDoosrs.IsDoorOpen(i)}");
+    }
+}
+
+
+TestIgnition(coupe);
+TestIgnition(sedan);
+
+TestDoors(coupe);
+TestDoors(sedan);
+
+//now public calss with both mulitple interfaces
+public class Car : IHasDoosrs, IMotorized
+{
+    public readonly bool[] _doors;
+    public Car(int numbersofdoors)
+    {
+        _doors = new bool[numbersofdoors];
+    }
+
+    public int NumberOfDoors => _doors.Length;
+
+    public bool IsEngineRunning { get; private set; }
+
+    public void OpenDoors(int doorIndex)
+    {
+        _doors[doorIndex] = true;
+        Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+        Console.WriteLine($"     {string.Join(",", _doors)}");
+        Console.WriteLine(GetType());
+
+    }
+
+    public void CloseDoors(int doorIndex)
+    {
+        _doors[doorIndex] = false;
+        Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+        Console.WriteLine($"     {string.Join(",", _doors)}");
+
+    }
+
+    public bool IsDoorOpen(int doorIndex)
+    {
+        Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+        Console.WriteLine($"     {string.Join(",", _doors)}");
+        return _doors[doorIndex];
+
+    }
+    
+    public void StartEngine()
+    {
+        if (IsEngineRunning)
+        { return; }
+
+        IsEngineRunning = true;
+        Console.WriteLine("Engine started🏎️");
+    }
+
+    public void StopEngine()
+    {
+        if (!IsEngineRunning)
+        { return; }
+
+        IsEngineRunning = false;
+        Console.WriteLine("Engine stopped🛑");
+    }
+}
+
+
+public class Room : IHasDoosrs
+{
+    public readonly bool[] _doors;
+
+    public Room(int numberofDoors)
+    { 
+        _doors = new bool[numberofDoors];
+    }
+
+    public int NumberOfDoors => _doors.Length;
+    public void OpenDoors(int doorIndex)
+    { 
+        _doors[doorIndex] = true;
+        Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+        Console.WriteLine($"     {string.Join(",", _doors)}");
+        Console.WriteLine(GetType());
+
+    }
+
+    public void CloseDoors(int doorIndex)
+    {
+        _doors[doorIndex] = false;
+        Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+        Console.WriteLine($"     {string.Join(",", _doors)}");
+
+    }
+
+    public bool IsDoorOpen(int doorIndex)
+    {
+        Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+        Console.WriteLine($"     {string.Join(",", _doors)}");
+        return _doors[doorIndex];
+
+    }
+
+}
+
+
+public class Motorcycle : IMotorized
+{ 
+    public bool IsEngineRunning { get; private set; }
+
+    public void StartEngine()
+    {
+        if (IsEngineRunning)
+        { return; }
+
+        IsEngineRunning = true;
+        Console.WriteLine("Engine started🏎️");
+    }
+
+    public void StopEngine()
+    {
+        if (!IsEngineRunning)
+        { return; }
+
+        IsEngineRunning = false;
+        Console.WriteLine("Engine stopped🛑");
+    }
+}
+
+
+public interface IHasDoosrs
+{ 
+    int NumberOfDoors { get; }
+    void OpenDoors(int doorIndex);
+
+    void CloseDoors(int doorIndex);
+
+    bool IsDoorOpen(int doorIndex);
+}
+
+public interface IMotorized
+{ 
+    bool IsEngineRunning { get; }
+
+    void StartEngine();
+
+    void StopEngine();
+}
