@@ -724,7 +724,7 @@ Inheritance.Run_inheritcance();*/
  */
 //you can inhert from multiple interfaces
 
-using System.Security.Cryptography.X509Certificates;
+/*using System.Security.Cryptography.X509Certificates;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -749,7 +749,7 @@ IMotorized motorized = motorcycle; //this part actually happen in the backend us
 Motorcycle motocycle2 = (Motorcycle)motorized; // of course iwll not do that but we can do it in better way
 
 
-/*
+*//*
  🤔 If multiple classes implement IHasDoosrs,
      how do we pick which one gets used?
 
@@ -761,7 +761,7 @@ Motorcycle motocycle2 = (Motorcycle)motorized; // of course iwll not do that but
 
  ⚙️ In real projects, this is often handled automatically
      using Dependency Injection (DI) containers.
-*/
+*//*
 IHasDoosrs doors = new Room(3);
 
 doors.OpenDoors(1);
@@ -936,4 +936,9 @@ public interface IMotorized
     void StartEngine();
 
     void StopEngine();
-}
+}*/
+//================================================
+using DeepDive_In_C_;
+
+Interfaces.Run_InterfacesEXamp();
+//running the interfaces exmples from the main 
