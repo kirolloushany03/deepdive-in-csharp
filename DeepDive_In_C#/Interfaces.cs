@@ -180,7 +180,14 @@ namespace DeepDive_In_C_
                 return _doors[doorIndex];
             }
             //another way to impemnt IsDoorOpen
+            /*
+            public bool IsDoorOpen(int doorIndex)
+                {
+                    Console.WriteLine($"Door {doorIndex} is {(_doors[doorIndex] is false ? "close" : "open")}");
+                    Console.WriteLine($"     {string.Join(",", _doors)}");
+                    return _doors[doorIndex];
 
+                }*/
         }
 
         // ======================= 🏍️ MOTORCYCLE CLASS =======================
