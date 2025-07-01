@@ -1049,9 +1049,12 @@ abstract class MyBaseClass
     public abstract void PrintAbstract();
 }
 */
-using DeepDive_In_C_;
+//using DeepDive_In_C_;
 
-AbstractClasse.Run_AbstractExamples();
+//AbstractClasse.Run_AbstractExamples();
+
+//================================================================================
+//begin a new one
 
 
 
