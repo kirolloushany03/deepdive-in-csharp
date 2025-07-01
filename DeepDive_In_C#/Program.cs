@@ -981,6 +981,7 @@ interface IMybasecalss
 //that in the abstract class but still will not compile
 //and we dont need to override the print method that in the abstract class as wasn't marked as abstract
 
+/*using DeepDive_In_C_;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 MyderviedClass myDerivedclass = new MyderviedClass();
@@ -999,7 +1000,7 @@ myDerivedAbstractClass2.printInterface();
 interface IMyInterface
 {
      void printInterface();
-}
+}*/
 
 //sth i notice here that if you jsut put in inhertance the 
 // interface classs , then the abstract clas will give you an error an the iwll not comipile 
@@ -1011,7 +1012,7 @@ C# uses a single-inheritance model for classes and multi-inheritance for interfa
 -All following types are assumed to be interfaces.
 ⚠️ That’s why putting IMyInterface first confuses the compiler — it thinks MyBaseClass is another interface, and throws the error when it realizes it's not.
 */
-abstract class MyDerivedAbstractClass : MyBaseClass, IMyInterface
+/*abstract class MyDerivedAbstractClass : MyBaseClass, IMyInterface
 {
     public abstract void printInterface();
 }
@@ -1047,9 +1048,10 @@ abstract class MyBaseClass
     //so you need that if you inhert from this you have to impment this mehtod
     public abstract void PrintAbstract();
 }
+*/
+using DeepDive_In_C_;
 
-
-
+AbstractClasse.Run_AbstractExamples();
 
 
 
