@@ -937,8 +937,119 @@ public interface IMotorized
 
     void StopEngine();
 }*/
-//================================================
+
+//===============================================
 /*using DeepDive_In_C_;
 
 Interfaces.Run_InterfacesEXamp();*/
-//running the interfaces exmples from the main 
+
+//===============================================
+//abstract classes
+// classes cannot be instantiated directly 
+//they provide some base fucnctionality and also have methods needs to be implement
+//like the interface
+
+// ❗ Some developers try to apply DRY (Don't Repeat Yourself) and see duplicate logic.
+// 😬 To solve this, they use abstract classes to "share" code across multiple classes,
+// hoping inheritance will clean things up. but we can use the compostions later
+// and we will unsderstand why
+
+//now test to break the rules we will try to instantiate an abstract class
+
+/*MyBaseClass myBaseClass = new MyBaseClass();//will get also can not make instance from abstract
+
+IMybasecalss myBaseClass2 = new IMybasecalss(); // or from interface this will not compile 
+
+interface IMybasecalss
+{
+    public void print();
+}*/
+
+
+// ✅ If a class inherits from an abstract class,
+// it must do the following to compile successfully:
+
+// 1️⃣ Implement **all** abstract methods defined in the base abstract class.
+// 2️⃣ Use the `override` keyword when implementing those methods.
+
+// ❌ If you forget to implement even one abstract method,
+// OR you forget the `override` keyword —
+// 🚫 The code will NOT compile and you’ll get a compiler error.
+
+//so the override if you remove it it will sth technicaly called hiding
+//that we decalre sth with the same name and signnature it will technically hide the other method
+//that in the abstract class but still will not compile
+//and we dont need to override the print method that in the abstract class as wasn't marked as abstract
+
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+MyderviedClass myDerivedclass = new MyderviedClass();
+myDerivedclass.print();
+myDerivedclass.PrintAbstract();
+
+Console.WriteLine("==============this th final one =================");
+MyDerivedClass2 myDerivedAbstractClass2 = new MyDerivedClass2();
+myDerivedAbstractClass2.print();
+myDerivedAbstractClass2.PrintAbstract();
+myDerivedAbstractClass2.printInterface();
+
+// abstract class also cna interhr from interfacess and other classes as we can see in this exmple
+
+
+interface IMyInterface
+{
+     void printInterface();
+}
+
+//sth i notice here that if you jsut put in inhertance the 
+// interface classs , then the abstract clas will give you an error an the iwll not comipile 
+//so yo uhave to put abstract class first and then the intnerfacess  so why
+
+/*📘 Why This Rule Exists
+C# uses a single-inheritance model for classes and multi-inheritance for interfaces. So:
+- The first type after the colon : must be the base class (if any).
+-All following types are assumed to be interfaces.
+⚠️ That’s why putting IMyInterface first confuses the compiler — it thinks MyBaseClass is another interface, and throws the error when it realizes it's not.
+*/
+abstract class MyDerivedAbstractClass : MyBaseClass, IMyInterface
+{
+    public abstract void printInterface();
+}
+
+class MyDerivedClass2 : MyDerivedAbstractClass
+{
+    //now we must impment both methods from the abstract calss and also the interface method
+    public override void PrintAbstract()
+    {
+        Console.WriteLine("PrintAbstract() in MyDerivedAbsractClass2");
+    }
+    public override void printInterface()
+    {
+        Console.WriteLine("printInterface() in MyDerivedAbsractClass2");
+    }
+}
+
+class MyderviedClass : MyBaseClass
+{
+    public override void PrintAbstract()
+    {
+        Console.WriteLine("PrintAbstract() in MyDerviedclass");
+    }
+}
+
+
+abstract class MyBaseClass
+{
+    public void print()
+    {
+        Console.WriteLine("Print() in MyBaseClass");
+    }
+    //so you need that if you inhert from this you have to impment this mehtod
+    public abstract void PrintAbstract();
+}
+
+
+
+
+
+
