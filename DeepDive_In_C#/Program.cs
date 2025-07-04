@@ -1140,9 +1140,13 @@ abstract class MyBaseClass
 //}
 
 
-using DeepDive_In_C_;
+//using DeepDive_In_C_;
 
-PrtotectedVsPrivate_AbstractVsVirtual.Run_Examples();
+//PrtotectedVsPrivate_AbstractVsVirtual.Run_Examples();
+
+//=================================================================
+//compostions
+
 
 
 
