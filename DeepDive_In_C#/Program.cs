@@ -1057,8 +1057,90 @@ abstract class MyBaseClass
 //begin a new one
 //two keywords that we have access in c# that is virtual and protected 
 
+//private keyword can not use it in the derived class that inhert from 
+//protected keyword that can be used in the derived class that inhert from 
 
-//prtoects 
+//virtual make you able have the option of override and implement 
+//absract you must override and implemnt all of th emethods abstracted
+
+
+//virtual
+//mix so the abstract you must to implement the abstract methods 
+//but here comee the virutal that you can use it that you can use it that
+//you hve the option to impment it or not 
+
+
+DerivedClass2 derivedClass2 = new();
+derivedClass2.printInDerivedClass();
+derivedClass2.VirtualPrintInBaseClass();
+class BaseClass2
+{
+    protected void PrintInBaseClass()
+    {
+        Console.WriteLine("PrintInBaseClass");
+    }
+
+    public virtual void VirtualPrintInBaseClass() // so virual means
+                                                  // you have the option to override
+                                                  // and implement it or not 
+    {
+        Console.WriteLine("VirtualPrintInBaseClass");
+    }
+}
+
+
+class DerivedClass2 : BaseClass2
+{
+    public void printInDerivedClass()
+    {
+        Console.WriteLine("printInDerivedClass");
+        PrintInBaseClass();
+    }
+
+    public override void VirtualPrintInBaseClass()
+    {
+        Console.WriteLine("VirtualPrintInBaseClass in the derived class");
+        Console.WriteLine("... and now we'll call the base class method!");        
+        base.VirtualPrintInBaseClass();
+    }
+}
+
+
+
+
+
+//protected
+
+//DerivedClass derivedClass = new();
+//derivedClass.PrintInDerivedClass();
+
+
+abstract class AbstractBaseClass
+{
+    protected void ProtectedPrintInBaseClass()
+    {
+        Console.WriteLine("ProtectedPrintInBaseClass");
+    }
+    protected abstract void ProtectedAbsractPrint();
+}
+
+class DerivedClass : AbstractBaseClass
+{
+    public void PrintInDerivedClass()
+    {
+        Console.WriteLine("we're in the derived class??");
+        base.ProtectedPrintInBaseClass();
+        Console.WriteLine("we are leaveing the method in the derived class!");
+    }
+
+    protected override void ProtectedAbsractPrint()
+    {
+        Console.WriteLine("ProtectedAbsractPrint()");
+    }
+}
+
+
+
 
 
 
