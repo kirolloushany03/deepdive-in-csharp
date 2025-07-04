@@ -1055,6 +1055,11 @@ abstract class MyBaseClass
 
 //================================================================================
 //begin a new one
+//two keywords that we have access in c# that is virtual and protected 
+
+
+//prtoects 
+
 
 
 
