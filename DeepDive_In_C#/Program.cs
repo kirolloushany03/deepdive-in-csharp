@@ -1144,11 +1144,409 @@ abstract class MyBaseClass
 
 //PrtotectedVsPrivate_AbstractVsVirtual.Run_Examples();
 
-//=================================================================
-//compostions
+////=================================================================
+////compostions
+
+
+//Computer computer = new(
+
+//    new Case(),
+//    new Motherboard(),
+//    new PowerSupply(),
+//    new HardDrive(sizeInTb: 16),
+//    new Ram(ramInGB: 64),
+//    new GraphicsCard());
+
+//computer.Poweron();
+
+////searled can ot be inherted
+//public sealed class Case
+//{
+//    public void PressPowerButton()
+//    {
+//        Console.WriteLine("Power button pressed");
+//    }
+//}
+
+
+//public sealed class Motherboard
+//{
+//    public void Boot()
+//    {
+//        Console.WriteLine("Booting...");
+//    }
+//}
+
+
+//public sealed class PowerSupply
+//{
+//    public void TurnOn()
+//    {
+//        Console.WriteLine("Power supply turned on");
+//    }
+//}
+
+//public sealed class HardDrive
+//{
+//    private readonly int _sizeInTb;
+//    public HardDrive(int sizeInTb)
+//    { 
+//        _sizeInTb = sizeInTb;
+//    }
+
+//    public void ReadData()
+//    {
+//        Console.WriteLine($"Reading data from the hard drive with size of {_sizeInTb} TB");
+//    }
+//}
+
+//public sealed class Ram
+//{
+//    private readonly int _RamInGB;
+
+//    public Ram(int ramInGB)
+//    {
+//        _RamInGB = ramInGB;
+//    }
+
+//    public void Load()
+//    {
+//        Console.WriteLine($"Loading data into ram with capacity of {_RamInGB} GB");
+//    }
+
+//}
+
+//public sealed class GraphicsCard
+//{ 
+//    public void Render()
+//    {
+//        Console.WriteLine("GPU Rendering");
+//    }
+//}
+
+
+////public sealed class Computer
+////{ 
+////    private readonly Case _case;
+////    private readonly Motherboard _motherboard;
+////    private readonly PowerSupply _powerSupply;
+////    private readonly HardDrive _hardDrive;
+////    private readonly Ram _ram;
+////    private readonly GraphicsCard _graphicsCard;
+
+////    public Computer( Case thecase , Motherboard motherboard, PowerSupply powersupply,
+////        HardDrive harddrive, Ram ram , GraphicsCard graphicsCard)
+////    { 
+////        _case = thecase;
+////        _motherboard = motherboard;
+////        _powerSupply = powersupply;
+////        _hardDrive = harddrive;
+////        _ram = ram;
+////        _graphicsCard = graphicsCard;
+////    }
+
+////   public void Poweron()
+////    {
+////        _case.PressPowerButton();
+////        _powerSupply.TurnOn();
+////        _motherboard.Boot();
+////        _ram.Load();
+////        _hardDrive.ReadData();
+////        _graphicsCard.Render();
+////    }
+
+////}
+
+
+////if it was a record will be like this 
+//public sealed record Computer
+//(Case Thecase, Motherboard Motherboard, PowerSupply Powersupply,
+//        HardDrive Harddrive, Ram Ram, GraphicsCard GraphicsCard)
+//{
+//    public void Poweron()
+//    {
+//        Thecase.PressPowerButton();
+//        Powersupply.TurnOn();
+//        Motherboard.Boot();
+//        Ram.Load();
+//        Harddrive.ReadData();
+//        GraphicsCard.Render();
+
+//    }
+//};
+
+
+//===========================================================================
+//head to head to see the adavanctage
 
 
 
 
+//public abstract class Vehicle
+//{ }
+
+//public abstract class Automobile : Vehicle
+//{
+//    private readonly string _engineType;
+//    protected Automobile(string engineType)
+//    { 
+//        _engineType = engineType;
+//    }
+//    public void StartEngine()
+//    { 
+//        StartEngine(_engineType);
+//    }
+//    public abstract void OpenDoor(DoorPostion doorPostion);
+
+//    protected static void StartEngine(string engineType)
+//    {
+//        Console.WriteLine($"starting {engineType} engine!");
+//    }
+//}
+////if we have abstract inhert from abstract we don't have to overriede the methods
+//public abstract class Car : Automobile
+//{
+//    public override void StartEngine() 
+//    {
+//        Console.WriteLine("Car starting engine 1.8L engine!");
+//    }
+//}
+
+//public class Sedan : Car
+//{
+//    public override void OpenDoor(DoorPostion doorPostion)
+//    {
+//        Console.WriteLine($"sendan opening {doorPostion} door!");
+//    }
+//}
+
+//public class Coupe : Car
+//{
+//    public override void OpenDoor(DoorPostion doorPostion)
+//    {
+//        if (doorPostion == DoorPostion.RearDriverSide ||
+//            doorPostion == DoorPostion.RearPassengerSide)
+//        {
+//            throw new InvalidOperationException("Coupe only have two doors");
+//        }
+//        Console.WriteLine($"Coupes only have two doors!");
+//    }
+//}
+
+//public class PickupTruck : Automobile
+//{
+//    public override void StartEngine()
+//    {
+//        Console.WriteLine("Truck starting engine 3.6 L engine!");   
+//    }
+
+//    public override void OpenDoor(DoorPostion doorPostion)
+//    {
+//        if (doorPostion == DoorPostion.RearPassengerSide ||
+//            doorPostion == DoorPostion.RearDriverSide)
+//        {
+//            throw new InvalidOperationException("Truck only have two doors");
+//        }
+//        Console.WriteLine($"Truck opening {doorPostion} door!");
+//    }
+//}
+//public class Van : Automobile
+//{
+//    public override void StartEngine()
+//    {
+//        Console.WriteLine("Van starting engine 3.6 L engine!");   
+//    }
+
+//    public override void OpenDoor(DoorPostion doorPostion)
+//    {
+//        if (doorPostion == DoorPostion.RearPassengerSide ||
+//            doorPostion == DoorPostion.RearDriverSide)
+//        {
+//            Console.WriteLine($"Van sliding open {doorPostion} door!");
+//        }
+//        else
+//        {
+//            Console.WriteLine($"van swinging {doorPostion} door!");
+//        }
+//    }
+//}
+//so what is the problem that we have with inhertance
+/*
+ * in the pickup truck engine if we will have like diff versionn we have to make nnew class to change the ening e
+ * or to inhert from it and then overridee the startengine 
+ * or picup truck with more doors so we will maek agian 
+ * so the probelm what we will get in more level with inhertance 
+ * 
+ */
 
 
+//using System.Threading.Channels;
+
+//ComposedVehicle composedSedan = new(
+//    new ConfigurableEngine(1.8f),
+//    new Dictionary<DoorPostion, IDoor> 
+//    {
+//        { DoorPostion.FronteDriverSide, new standardswingingDoor()},
+//        {DoorPostion.FrontPassengerSide, new standardswingingDoor()},
+//        {DoorPostion.RearDriverSide, new standardswingingDoor()},
+//        { DoorPostion.RearPassengerSide, new standardswingingDoor()}
+//    });
+
+//composedSedan.StartEngine();
+//composedSedan.OpenDoore(DoorPostion.FronteDriverSide);
+
+
+//public enum DoorPostion
+//{
+//    FronteDriverSide,
+//    RearDriverSide,
+//    FrontPassengerSide,
+//    RearPassengerSide
+//};
+//public interface IEngine
+//{
+//    void Start();
+//}
+
+//public interface IDoor
+//{
+//    void Open();
+//}
+
+//public class V8Engine : IEngine
+//{
+//    public void Start()
+//    {
+//        Console.WriteLine("Big  v8 engine starting");
+//    }
+//}
+
+//public class ConfigurableEngine : IEngine
+//{
+//    private readonly float _displacemtnInliters;
+//    public ConfigurableEngine(float displacemtnInliters)
+//    {
+//        _displacemtnInliters = displacemtnInliters;
+//    }
+
+//    public void Start()
+//    {
+//        Console.WriteLine($"starting {_displacemtnInliters}L engine");
+//    }
+//}
+
+//public class standardswingingDoor : IDoor
+//{
+//    public void Open()
+//    {
+//        Console.WriteLine("swinging open door");
+//    }
+//}
+//public class SlidingDoor : IDoor
+//{
+//    public void Open()
+//    {
+//        Console.WriteLine("Sliding opening door");
+//    }
+//}
+
+//public sealed class ComposedVehicle
+//{
+//    private readonly IEngine _engine;
+//    private readonly IReadOnlyDictionary<DoorPostion, IDoor> _doors;
+//    public ComposedVehicle(IEngine engine, Dictionary<DoorPostion, IDoor> doors)
+//    { 
+//        _engine = engine;
+//        _doors = doors;
+//    }
+//    public void StartEngine()
+//    { 
+//        _engine.Start();
+//    }
+
+//    public void OpenDoore(DoorPostion doorpostion)
+//    {
+//        if (!_doors.TryGetValue(doorpostion, out IDoor? door))
+//        {
+//            throw new InvalidOperationException(
+//                $"thre is no door at postion {doorpostion}");
+//        }
+//        Console.WriteLine($"opening {doorpostion} door...");
+//        door.Open();
+//    }
+
+//}
+
+//just simple exampole to apply on it from my side 
+
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+CompositeBattel knight = new(new Sword(), new LeatherArmor());
+knight.finishThem();
+
+Console.WriteLine("-------------------------");
+
+CompositeBattel bigerone = new(new Axe(), new SteelArmor());
+bigerone.finishThem();
+
+public interface Iweapon
+{
+    void attack();
+}
+
+public interface IArmor
+{
+    void Defend();
+}
+
+public class Sword : Iweapon
+{
+    public void attack()
+    {
+        Console.WriteLine("tak you with the sword");
+    }
+}
+
+
+public class Axe : Iweapon
+{
+    public void attack()
+    {
+        Console.WriteLine("axe send it to get your head");
+    }
+}
+
+public class LeatherArmor : IArmor
+{
+    public void Defend()
+    {
+        Console.WriteLine("defending with leather armor");
+    }
+}
+
+public class SteelArmor : IArmor
+{
+    public void Defend()
+    {
+        Console.WriteLine("defending with steel amorm 🥷");
+    }
+}
+
+
+public class CompositeBattel
+{ 
+    private readonly Iweapon _weapon;
+    private readonly IArmor _armor;
+
+    public CompositeBattel(Iweapon weapon, IArmor armor)
+    { 
+        _weapon = weapon;
+        _armor = armor;
+    }
+
+    public void finishThem()
+    {
+        Console.WriteLine("will finsihe them");
+        _weapon.attack();
+        _armor.Defend();
+    }
+}
