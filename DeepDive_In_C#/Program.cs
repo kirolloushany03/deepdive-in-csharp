@@ -1479,74 +1479,256 @@ abstract class MyBaseClass
 
 //just simple exampole to apply on it from my side 
 
-Console.OutputEncoding = System.Text.Encoding.UTF8;
-CompositeBattel knight = new(new Sword(), new LeatherArmor());
-knight.finishThem();
+//Console.OutputEncoding = System.Text.Encoding.UTF8;
+//CompositeBattel knight = new(new Sword(), new LeatherArmor());
+//knight.finishThem();
 
-Console.WriteLine("-------------------------");
+//Console.WriteLine("-------------------------");
 
-CompositeBattel bigerone = new(new Axe(), new SteelArmor());
-bigerone.finishThem();
+//CompositeBattel bigerone = new(new Axe(), new SteelArmor());
+//bigerone.finishThem();
 
-public interface Iweapon
+//public interface Iweapon
+//{
+//    void attack();
+//}
+
+//public interface IArmor
+//{
+//    void Defend();
+//}
+
+//public class Sword : Iweapon
+//{
+//    public void attack()
+//    {
+//        Console.WriteLine("tak you with the sword");
+//    }
+//}
+
+
+//public class Axe : Iweapon
+//{
+//    public void attack()
+//    {
+//        Console.WriteLine("axe send it to get your head");
+//    }
+//}
+
+//public class LeatherArmor : IArmor
+//{
+//    public void Defend()
+//    {
+//        Console.WriteLine("defending with leather armor");
+//    }
+//}
+
+//public class SteelArmor : IArmor
+//{
+//    public void Defend()
+//    {
+//        Console.WriteLine("defending with steel amorm 🥷");
+//    }
+//}
+
+
+//public class CompositeBattel
+//{ 
+//    private readonly Iweapon _weapon;
+//    private readonly IArmor _armor;
+
+//    public CompositeBattel(Iweapon weapon, IArmor armor)
+//    { 
+//        _weapon = weapon;
+//        _armor = armor;
+//    }
+
+//    public void finishThem()
+//    {
+//        Console.WriteLine("will finsihe them");
+//        _weapon.attack();
+//        _armor.Defend();
+//    }
+//}
+
+
+//--------------------------------------------------------------------
+////genrics
+////generic does not care about the type
+//// or cares only about the type in a limited way
+////we can use genrics on classes , interfaces, methods, etc...
+
+/*part 1*/
+GenricClass<int> myNumbericInstance = new GenricClass<int>();
+GenricClass<string> mystringInstance = new GenricClass<string>();
+//GenricClass instancewithouType = new GenricClass(); //so this will not work
+
+//so for this sone we dont need to specify the type of it when we make an instance
+ImplemntationWithIntgerType instanceofImplmentationWithIntegerType = new();
+//-----------------------------------------------------------------------------------
+
+//part 2
+ClassWithGenericMethod InstanceclassGenricMehtod = new();
+InstanceclassGenricMehtod.GenricMethod("this is a string");
+InstanceclassGenricMehtod.GenricMethod(42);
+InstanceclassGenricMehtod.GenricFunction(3.14);
+
+//just here we wrote that to prove that the return will be the same type
+int genricfunctionresult1 = InstanceclassGenricMehtod.GenricFunction(42);
+string genricfunctionresult2 = InstanceclassGenricMehtod.GenricFunction("this a string");
+double genricfunctionresult3 = InstanceclassGenricMehtod.GenricFunction(3.14);
+
+/// <summary> part 3
+/// so we was dealing with generics before like in list or dictionries
+/// </summary>
+
+List<int> numericList = new List<int>();
+List<string> stringList = new List<string>();
+
+
+/**the common usage to see in c#
+ * is like i don't really dont care about what type you are as long as
+ * you have a parameter list constructor so i need this contructor on whaterver you givin to me
+ * 
+ * or care that you are a refrence type so you can specify that you need to be class
+*/
+//we can use constraints to limit the types that can be used with a genric
+
+
+
+
+Dog frank = new(
+Weight: 50,
+height: 24);
+
+Dog spot = new(
+Weight: 35,
+height: 18);
+
+Cat whiskers = new(
+Weight: 10,
+height: 12,
+HasFur: true);
+
+Cat pharoah = new(
+Weight: 12,
+height: 14,
+HasFur: false);
+
+Fish goldie = new(
+Weight: 0.5,
+height: 2);
+var animals = new IAnimal[] { frank, spot, whiskers, pharoah, goldie };
+
+var totalweight = CalculateWeight(animals);
+var totalheight = CalculateHeight(animals);
+var onlyfur = OnlyWithFur(animals);
+
+Console.WriteLine($"this the total Weight {totalheight} " +
+    $"total height {totalheight} " +
+    $"and the only ones have furs is -->{onlyfur.ToString}");
+double CalculateWeight<T>(IEnumerable<T> animals)
+    where T : IAnimal //this the only constrain we want
 {
-    void attack();
+    var total = animals.Sum(a => a.Weight);
+    return total;
+}
+ 
+double CalculateHeight<T>(IEnumerable<T> animals)
+    where T : IAnimal
+{
+    var total = animals.Sum(a => a.height);
+    return total;
 }
 
-public interface IArmor
-{
-    void Defend();
-}
-
-public class Sword : Iweapon
-{
-    public void attack()
-    {
-        Console.WriteLine("tak you with the sword");
-    }
-}
-
-
-public class Axe : Iweapon
-{
-    public void attack()
-    {
-        Console.WriteLine("axe send it to get your head");
-    }
-}
-
-public class LeatherArmor : IArmor
-{
-    public void Defend()
-    {
-        Console.WriteLine("defending with leather armor");
-    }
-}
-
-public class SteelArmor : IArmor
-{
-    public void Defend()
-    {
-        Console.WriteLine("defending with steel amorm 🥷");
-    }
-}
-
-
-public class CompositeBattel
+IEnumerable<IAnimal> OnlyWithFur(IEnumerable<IAnimal> animals)
 { 
-    private readonly Iweapon _weapon;
-    private readonly IArmor _armor;
+    return animals.Where(a => a.HasFur);
+}
 
-    public CompositeBattel(Iweapon weapon, IArmor armor)
-    { 
-        _weapon = weapon;
-        _armor = armor;
-    }
 
-    public void finishThem()
+//------------interface classes etc 👇👇 and instantiate them up 👆👆------------
+public interface IAnimal
+{
+    double Weight { get; }
+    double height { get; }
+    bool HasFur { get; }
+}
+
+public record Cat(
+    double Weight,
+    double height,
+    bool HasFur) : IAnimal;
+
+public record Dog(double Weight, double height) : IAnimal
+{
+    public bool HasFur => true;
+}
+
+public record Fish(
+    double Weight,
+    double height) :
+    IAnimal
+{
+    public bool HasFur => false;
+}
+
+
+//part 2
+//now lets see some genric methods👇👇
+public class ClassWithGenericMethod
+{
+    public void GenricMethod<T>(T value)
     {
-        Console.WriteLine("will finsihe them");
-        _weapon.attack();
-        _armor.Defend();
+        Console.WriteLine(
+            $"The type of the value is {value?.GetType().Name}" +
+            $" and the value is --> {value}");
+    }
+    public T GenricFunction<T>(T value)
+    {
+        Console.WriteLine(
+            $"the type of the value is --> {value?.GetType().Name}");
+        return value;
     }
 }
+
+/*part 1 ---------------------------------------*/
+//so we saw some genric classes and genric interfaces 👇👇
+//we could also make an implemnetation that specffies the type
+//so we can make the class not genric but specify the type in the interface
+public class ImplemntationWithIntgerType : IGenericIneterace<int>
+{
+
+}
+public interface IGenericIneterace<T>
+{
+    //no methods
+}
+
+public class GenricClass<T> : IGenericIneterace<T>
+{
+    // so the class itseelf also needs to have a type of prameter on it 
+    //to allow caller creating instances of this class to specify the type
+}
+
+//static int[] TwoSum(int[] nums, int target)
+//{
+//    for (int i = 0; i < nums.Length; i++)
+//    {
+//        for (int j = i+1; j < nums.Length; j++)
+//        {
+//            if ( nums[i] + nums[j] == target)
+//                return new int[] {i , j };
+//        }
+//    }
+//    return new int[] { -1, -1 };
+//}
+
+//int[] test = new int[] { 3, 2, 4 };
+//Console.WriteLine($"[{string.Join(",", TwoSum(test, 6))}]");
+
+
+
+
+//return and make the genrics again write it again 
+
