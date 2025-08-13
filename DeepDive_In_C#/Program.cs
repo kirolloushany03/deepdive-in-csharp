@@ -1844,6 +1844,91 @@ public class SomeEntity : IEntity
 // - cares only about type in a limitied way
 // we can use genrics on classes , methods, inteface, etc ...
 
-// ─────────────────────────── 🧭 SECTION: <1> ───────────────────────────
+
+
+// ─────────────────────────── 🧭 SECTION: <1>test genric class and give type───────────────────────────
+
+
+GenricClass<int> mynumbericInstance = new GenricClass<int>();
+GenricClass<string> MyStrigInstance = new GenricClass<string>();
+//GenricClass instacewithoutType = new GenricClass(); //so this will not work as no type
+
+// ─────────────────────────── 🧭 SECTION: <3>test normal classe with gernic methods───────────────────────
+ClassWithGernicMethod instanceofclassWithGenricMethhod = new();
+instanceofclassWithGenricMethhod.GenricMehtod("This a string");
+instanceofclassWithGenricMethhod.GenricMehtod(42);
+instanceofclassWithGenricMethhod.GenricMehtod(152.1);
+
+Console.WriteLine("\nthis by GenricFunction\n");
+//so here we check that the GenricFunction returns the actual type
+//and if we changed the string to int for the first will give us error (connot implcity from string to int)
+string GernicFunctionReustl1 = instanceofclassWithGenricMethhod.GenricFunction("this a string");
+int GernicFunctionReustl2 = instanceofclassWithGenricMethhod.GenricFunction(42);
+double GernicFunctionReustl3 = instanceofclassWithGenricMethhod.GenricFunction(152.1);
+
+// --------------------------- 🧭 SECTION: <4> testing existing genric ---------------------------
+List<int> ints = new List<int>();
+List<string> stringList = new List<string>();
+//this becaue slgrithms and data structre formany collections don't care abpoutthe type fo the elements
+
+
+
+
+
+// --------------------------- 🧭 SECTION: testing up 👆 ---------------------------
+
+// ─────────────────────────── 🧭 SECTION: <3> normal classe with gernic methods───────────────────────────
+//and here if we made the class gernic so we dont need to make the methods
+//ass genrics it will be gernics automatically
+//-The class declares<T> at the top.
+//- All methods inside the class can use T directly—no need to redeclare <T> in the method.
+
+public class ClassWithGernicMethod
+{
+    public void GenricMehtod<T>(T value)
+    {
+        Console.WriteLine(
+            $"the type of the value is {value.GetType().Name}" +
+            $" the value is {value}");
+    }
+
+    public T GenricFunction<T>(T value)
+    {
+        Console.WriteLine(
+            $"the type of the value is {value.GetType().Name}" +
+            $" and the value of it is {value}");
+        return value;
+    }
+}
+
+
+
+
+
+
+// ─────────────────────────── 🧭 SECTION: <2> genirc classes ───────────────────────────
+
+//we could also make an implemnation that specfies the type so youcan specify only the interface
+//so no need from adding type to the class
+public class ImplementationwihtoutIntegerType : IGericIneterface<int>
+{ 
+
+}
+
+
+// ─────────────────────────── 🧭 SECTION: <1> genric interfaces and classes───────────────────────────
 //we can use genrics to define an interface with atype parameter<T>
+public interface IGericIneterface<T>
+{ 
+    //not methods just creating empy interface
+}
+
+//we can make class that implemnt this interface
+public class GenricClass<T>: IGericIneterface<T>
+{ 
+    /*
+     * so the class itesef also needs to have atype parameter on it
+     * to all caller createing instances of this class to specfiy type
+     */
+}
 
