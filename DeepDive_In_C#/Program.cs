@@ -1553,163 +1553,163 @@ abstract class MyBaseClass
 
 
 //--------------------------------------------------------------------
-////genrics
-////generic does not care about the type
-//// or cares only about the type in a limited way
-////we can use genrics on classes , interfaces, methods, etc...
+//////genrics
+//////generic does not care about the type
+////// or cares only about the type in a limited way
+//////we can use genrics on classes , interfaces, methods, etc...
 
-/*part 1*/
-GenricClass<int> myNumbericInstance = new GenricClass<int>();
-GenricClass<string> mystringInstance = new GenricClass<string>();
-//GenricClass instancewithouType = new GenricClass(); //so this will not work
+///*part 1*/
+//GenricClass<int> myNumbericInstance = new GenricClass<int>();
+//GenricClass<string> mystringInstance = new GenricClass<string>();
+////GenricClass instancewithouType = new GenricClass(); //so this will not work
 
-//so for this sone we dont need to specify the type of it when we make an instance
-ImplemntationWithIntgerType instanceofImplmentationWithIntegerType = new();
-//-----------------------------------------------------------------------------------
+////so for this sone we dont need to specify the type of it when we make an instance
+//ImplemntationWithIntgerType instanceofImplmentationWithIntegerType = new();
+////-----------------------------------------------------------------------------------
 
-//part 2
-ClassWithGenericMethod InstanceclassGenricMehtod = new();
-InstanceclassGenricMehtod.GenricMethod("this is a string");
-InstanceclassGenricMehtod.GenricMethod(42);
-InstanceclassGenricMehtod.GenricFunction(3.14);
+////part 2
+//ClassWithGenericMethod InstanceclassGenricMehtod = new();
+//InstanceclassGenricMehtod.GenricMethod("this is a string");
+//InstanceclassGenricMehtod.GenricMethod(42);
+//InstanceclassGenricMehtod.GenricFunction(3.14);
 
-//just here we wrote that to prove that the return will be the same type
-int genricfunctionresult1 = InstanceclassGenricMehtod.GenricFunction(42);
-string genricfunctionresult2 = InstanceclassGenricMehtod.GenricFunction("this a string");
-double genricfunctionresult3 = InstanceclassGenricMehtod.GenricFunction(3.14);
+////just here we wrote that to prove that the return will be the same type
+//int genricfunctionresult1 = InstanceclassGenricMehtod.GenricFunction(42);
+//string genricfunctionresult2 = InstanceclassGenricMehtod.GenricFunction("this a string");
+//double genricfunctionresult3 = InstanceclassGenricMehtod.GenricFunction(3.14);
 
-/// <summary> part 3
-/// so we was dealing with generics before like in list or dictionries
-/// </summary>
+///// <summary> part 3
+///// so we was dealing with generics before like in list or dictionries
+///// </summary>
 
-List<int> numericList = new List<int>();
-List<string> stringList = new List<string>();
-
-
-/**the common usage to see in c#
- * is like i don't really dont care about what type you are as long as
- * you have a parameter list constructor so i need this contructor on whaterver you givin to me
- * 
- * or care that you are a refrence type so you can specify that you need to be class
-*/
-//we can use constraints to limit the types that can be used with a genric
+//List<int> numericList = new List<int>();
+//List<string> stringList = new List<string>();
 
 
+///**the common usage to see in c#
+// * is like i don't really dont care about what type you are as long as
+// * you have a parameter list constructor so i need this contructor on whaterver you givin to me
+// * 
+// * or care that you are a refrence type so you can specify that you need to be class
+//*/
+////we can use constraints to limit the types that can be used with a genric
 
 
-Dog frank = new(
-Weight: 50,
-height: 24);
-
-Dog spot = new(
-Weight: 35,
-height: 18);
-
-Cat whiskers = new(
-Weight: 10,
-height: 12,
-HasFur: true);
-
-Cat pharoah = new(
-Weight: 12,
-height: 14,
-HasFur: false);
-
-Fish goldie = new(
-Weight: 0.5,
-height: 2);
-var animals = new IAnimal[] { frank, spot, whiskers, pharoah, goldie };
-
-var totalweight = CalculateWeight(animals);
-var totalheight = CalculateHeight(animals);
-var onlyfur = OnlyWithFur(animals);
-
-Console.WriteLine($"this the total Weight {totalheight} " +
-    $"total height {totalheight} " +
-    $"and the only ones have furs is -->{onlyfur.ToString}");
-double CalculateWeight<T>(IEnumerable<T> animals)
-    where T : IAnimal //this the only constrain we want
-{
-    var total = animals.Sum(a => a.Weight);
-    return total;
-}
- 
-double CalculateHeight<T>(IEnumerable<T> animals)
-    where T : IAnimal
-{
-    var total = animals.Sum(a => a.height);
-    return total;
-}
-
-IEnumerable<IAnimal> OnlyWithFur(IEnumerable<IAnimal> animals)
-{ 
-    return animals.Where(a => a.HasFur);
-}
 
 
-//------------interface classes etc 👇👇 and instantiate them up 👆👆------------
-public interface IAnimal
-{
-    double Weight { get; }
-    double height { get; }
-    bool HasFur { get; }
-}
+//Dog frank = new(
+//Weight: 50,
+//height: 24);
 
-public record Cat(
-    double Weight,
-    double height,
-    bool HasFur) : IAnimal;
+//Dog spot = new(
+//Weight: 35,
+//height: 18);
 
-public record Dog(double Weight, double height) : IAnimal
-{
-    public bool HasFur => true;
-}
+//Cat whiskers = new(
+//Weight: 10,
+//height: 12,
+//HasFur: true);
 
-public record Fish(
-    double Weight,
-    double height) :
-    IAnimal
-{
-    public bool HasFur => false;
-}
+//Cat pharoah = new(
+//Weight: 12,
+//height: 14,
+//HasFur: false);
+
+//Fish goldie = new(
+//Weight: 0.5,
+//height: 2);
+//var animals = new IAnimal[] { frank, spot, whiskers, pharoah, goldie };
+
+//var totalweight = CalculateWeight(animals);
+//var totalheight = CalculateHeight(animals);
+//var onlyfur = OnlyWithFur(animals);
+
+//Console.WriteLine($"this the total Weight {totalheight} " +
+//    $"total height {totalheight} " +
+//    $"and the only ones have furs is -->{onlyfur.ToString}");
+//double CalculateWeight<T>(IEnumerable<T> animals)
+//    where T : IAnimal //this the only constrain we want
+//{
+//    var total = animals.Sum(a => a.Weight);
+//    return total;
+//}
+
+//double CalculateHeight<T>(IEnumerable<T> animals)
+//    where T : IAnimal
+//{
+//    var total = animals.Sum(a => a.height);
+//    return total;
+//}
+
+//IEnumerable<IAnimal> OnlyWithFur(IEnumerable<IAnimal> animals)
+//{ 
+//    return animals.Where(a => a.HasFur);
+//}
 
 
-//part 2
-//now lets see some genric methods👇👇
-public class ClassWithGenericMethod
-{
-    public void GenricMethod<T>(T value)
-    {
-        Console.WriteLine(
-            $"The type of the value is {value?.GetType().Name}" +
-            $" and the value is --> {value}");
-    }
-    public T GenricFunction<T>(T value)
-    {
-        Console.WriteLine(
-            $"the type of the value is --> {value?.GetType().Name}");
-        return value;
-    }
-}
+////------------interface classes etc 👇👇 and instantiate them up 👆👆------------
+//public interface IAnimal
+//{
+//    double Weight { get; }
+//    double height { get; }
+//    bool HasFur { get; }
+//}
 
-/*part 1 ---------------------------------------*/
-//so we saw some genric classes and genric interfaces 👇👇
-//we could also make an implemnetation that specffies the type
-//so we can make the class not genric but specify the type in the interface
-public class ImplemntationWithIntgerType : IGenericIneterace<int>
-{
+//public record Cat(
+//    double Weight,
+//    double height,
+//    bool HasFur) : IAnimal;
 
-}
-public interface IGenericIneterace<T>
-{
-    //no methods
-}
+//public record Dog(double Weight, double height) : IAnimal
+//{
+//    public bool HasFur => true;
+//}
 
-public class GenricClass<T> : IGenericIneterace<T>
-{
-    // so the class itseelf also needs to have a type of prameter on it 
-    //to allow caller creating instances of this class to specify the type
-}
+//public record Fish(
+//    double Weight,
+//    double height) :
+//    IAnimal
+//{
+//    public bool HasFur => false;
+//}
+
+
+////part 2
+////now lets see some genric methods👇👇
+//public class ClassWithGenericMethod
+//{
+//    public void GenricMethod<T>(T value)
+//    {
+//        Console.WriteLine(
+//            $"The type of the value is {value?.GetType().Name}" +
+//            $" and the value is --> {value}");
+//    }
+//    public T GenricFunction<T>(T value)
+//    {
+//        Console.WriteLine(
+//            $"the type of the value is --> {value?.GetType().Name}");
+//        return value;
+//    }
+//}
+
+///*part 1 ---------------------------------------*/
+////so we saw some genric classes and genric interfaces 👇👇
+////we could also make an implemnetation that specffies the type
+////so we can make the class not genric but specify the type in the interface
+//public class ImplemntationWithIntgerType : IGenericIneterace<int>
+//{
+
+//}
+//public interface IGenericIneterace<T>
+//{
+//    //no methods
+//}
+
+//public class GenricClass<T> : IGenericIneterace<T>
+//{
+//    // so the class itseelf also needs to have a type of prameter on it 
+//    //to allow caller creating instances of this class to specify the type
+//}
 
 //static int[] TwoSum(int[] nums, int target)
 //{
@@ -1729,6 +1729,121 @@ public class GenricClass<T> : IGenericIneterace<T>
 
 
 
-
+//exercise on genrics
 //return and make the genrics again write it again 
+
+//(2)
+//Utilities.Inspect(22);
+//Utilities.Inspect("hellow");
+//Utilities.Inspect(2.22);
+
+
+//(3)
+
+/*void Swap<T>(ref T value1, ref T value2)
+{
+    Console.WriteLine($"this value1 = {value1} and this value2 = {value2}");
+    var temp = value2;
+    value2 = value1;
+    value1 = temp;
+    Console.WriteLine($"this value1 = {value1} and this value2 = {value2}");
+}
+int a = 22 , b = 23 ;
+
+Swap(ref a, ref b);*/
+
+
+
+
+//------------------------------------------------------
+// (1) A generic container class that can hold one item of any type 'T'.
+/*public class Box<T>
+{
+    public T ?Content { get; set; }
+
+}
+//(2) // A static class for general-purpose, reusable methods.
+public static class Utilities
+{
+    public static void Inspect<T>(T value)
+    {
+        Console.WriteLine(value?.GetType());
+    }
+}*/
+
+//(4)
+
+
+/*void ProcessEntity<T>(T entity)
+    where T : IEntity
+{
+    Console.WriteLine(entity.Id);
+}
+
+IEntity entity = new SomeEntity { Id = 42 };
+
+ProcessEntity(entity);
+
+public interface IEntity
+{ 
+    int Id { get; set; }
+}
+
+public class SomeEntity : IEntity
+{ 
+    public int Id { get; set; }
+}*/
+
+//Test testtry = new();
+//testtry.ID = 22;
+
+//Repository<Test> try22 = new (testtry);
+//Console.WriteLine(try22.Printall);
+
+
+//public interface IEntity
+//{
+//    int ID { get; set; }
+//}
+
+//public class Test : IEntity
+//{
+//    public int ID { get; set; }
+//}
+
+
+
+////(5)
+//public class Repository<T>
+//    where T : IEntity
+//{ 
+//    public Repository(T firstitem) => items.Add(firstitem);
+//    private List<T> items  =new ();
+
+//    public void AddItem(T item)
+//    { 
+//        items.Add(item);
+//    }
+
+//    public T FindById(int id)
+//    {
+//        return items.FirstOrDefault(x => x.ID == id);
+
+//    }
+
+//    public void Printall()
+//    {
+//        Console.WriteLine(items.ToString());
+//    }
+//}
+
+
+//genirics again
+//gernics are used to create things with a placeholder for the type
+// - this means that genrics dont care about type
+// - cares only about type in a limitied way
+// we can use genrics on classes , methods, inteface, etc ...
+
+// ─────────────────────────── 🧭 SECTION: <1> ───────────────────────────
+//we can use genrics to define an interface with atype parameter<T>
 
