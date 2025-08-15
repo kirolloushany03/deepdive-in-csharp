@@ -1869,7 +1869,7 @@ double GernicFunctionReustl3 = instanceofclassWithGenricMethhod.GenricFunction(1
 // --------------------------- 🧭 SECTION: <4> testing existing genric ---------------------------
 List<int> ints = new List<int>();
 List<string> stringList = new List<string>();
-//this becaue slgrithms and data structre formany collections don't care abpoutthe type fo the elements
+//this becaue algorithms and data structre formany collections don't care abpoutthe type fo the elements
 
 
 
