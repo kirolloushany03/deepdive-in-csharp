@@ -1873,7 +1873,51 @@ List<string> stringList = new List<string>();
 //that i don't care what type you are as loing as you have a parameter list constructor, i
 //just need that constructor on whatever type you're giving me, and we're good to go  or sometimes
 
+// ─────────────────────────── 🧭 SECTION: <5>test exampele that combine everything───────────────────────────
 
+Dog dog1 = new(Weight:20 , Height:30);
+Dog dog2 = new(Weight:30 , Height:40);
+
+Cat cat1 = new(Weight:10 , Height:20, HasFur:false);
+Cat cat2 = new(Weight:20 , Height:30, HasFur:true);
+
+Fish fish1 = new(Weight: 0.5, Height: 1);
+
+var animals = new IAnimal[] { dog1, dog2, cat1, cat2, fish1 };
+
+Console.WriteLine("\n------------------------------\n");
+Console.WriteLine($"this the sum weight of all the animals {CalculateWeight(animals)}");
+Console.WriteLine($"this the sum height of all the animals {CalculateHeigth(animals)}");
+Console.WriteLine($"this the the animals that has fur {onlyWithFur(animals)}");
+
+//we can also make this as it is the same type
+var totalcatWeight = new Cat[] { cat1, cat2 };
+var totaldogWeigt = new Dog[] {dog1, dog2 };
+var totalFishweight = new Fish[] { fish1 };
+
+
+Console.WriteLine($"this the total weight for cats {CalculateWeight(totalcatWeight)}");
+Console.WriteLine($"this the total weight for dogs {CalculateWeight(totaldogWeigt)}");
+Console.WriteLine($"this the total weight for HasFur {CalculateWeight(totalFishweight)}");
+
+
+static double  CalculateWeight<T>(IEnumerable<T> animals)
+    where T : IAnimal
+{ 
+    var total = animals.Sum(a => a.Weight); 
+    return total;
+}
+static double  CalculateHeigth<T>(IEnumerable<T> animals)
+    where T : IAnimal
+{ 
+    var total = animals.Sum(a => a.Height); 
+    return total;
+}
+
+IEnumerable<IAnimal>  onlyWithFur(IEnumerable<IAnimal> animals)
+{ 
+    return animals.Where(a => a.HasFur);
+}
 
 
 // --------------------------- 🧭 SECTION: testing up 👆 ---------------------------
@@ -1888,9 +1932,21 @@ public interface IAnimal
     double Height { get; }
     bool HasFur { get; }
 }
+/*just small info for me
+ * so this line 👇 (record) done automatically (declares dog, create immutable properties for weight, height, hasfur)
+ * also genrates a constructor that sets those properties, also implements value based equality(Equalt, GetHashcode),
+ * provides Tostring() override and supprots with experssion 
+ */
+public record Cat(double Weight, double Height, bool HasFur) : IAnimal;
+public record Dog(double Weight, double Height) : IAnimal
+{
+    public bool HasFur => true;
+}
 
-
-
+public record Fish(double Weight, double Height) : IAnimal
+{
+    public bool HasFur => false;
+}
 
 // ─────────────────────────── 🧭 SECTION: <3> normal classe with gernic methods───────────────────────────
 //and here if we made the class gernic so we dont need to make the methods
