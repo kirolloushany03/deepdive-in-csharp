@@ -2008,3 +2008,29 @@ public class SomeEntity : IEntity
 //-----------------------------------------------------------------------------------------------
 //Tubles
 //Ah shit here we go again
+//what is tubles (a light weight data transfer object)
+//that can contain multple values of diffrenct types 
+
+// Tuples in C# come in two different flavors:
+// 1. System.Tuple:
+//  -reference type
+//  - immutable ( you can't change it after it's created.)
+//  - values are properties
+//2. System.ValueTuple: a value type
+//  - value type
+//  - mutable
+//  - values are fields
+
+//lets begin with the system.Tuple
+Tuple<int, string> tuple = new Tuple<int, string>(1,"one");
+Tuple<int, string> tuple2 = new (1,"one");
+
+//system.ValueTuple
+
+ValueTuple<int, string> ValueTuple = new ValueTuple<int, string>(1, "one");
+ValueTuple<int, string> ValueTuple2 = new (1, "one");
+ValueTuple<int, string> ValueTuple3 = (1, "one");
+
+var ValueTuple4 = (1,2,3,4,5,8,6,4, "one", 0.25);
+
+ 
