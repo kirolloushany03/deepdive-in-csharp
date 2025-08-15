@@ -1870,12 +1870,27 @@ double GernicFunctionReustl3 = instanceofclassWithGenricMethhod.GenricFunction(1
 List<int> ints = new List<int>();
 List<string> stringList = new List<string>();
 //this becaue algorithms and data structre formany collections don't care abpoutthe type fo the elements
-
+//that i don't care what type you are as loing as you have a parameter list constructor, i
+//just need that constructor on whatever type you're giving me, and we're good to go  or sometimes
 
 
 
 
 // --------------------------- 🧭 SECTION: testing up 👆 ---------------------------
+
+// ─────────────────────────── 🧭 SECTION: <5> exampele that combine everything───────────────────────────
+//so what if we care about they type but not the exact type?
+// we can use constraints to limit the types that can be used with a generic!
+
+public interface IAnimal
+{
+    double Weight { get; }
+    double Height { get; }
+    bool HasFur { get; }
+}
+
+
+
 
 // ─────────────────────────── 🧭 SECTION: <3> normal classe with gernic methods───────────────────────────
 //and here if we made the class gernic so we dont need to make the methods
