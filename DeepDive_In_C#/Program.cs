@@ -2183,6 +2183,20 @@ Console.WriteLine($"converted {hellowWorldConvertedback}");
 
 Console.WriteLine($"{hellowWorldConvertedback == HelloWorld}");
 
+string unsupportedAsciiString = "😂 i'm in danger";
+byte[] unsuppoortedAsciiBytes = Encoding.ASCII.GetBytes(unsupportedAsciiString);
+string convertedbackfromunsupportedAscii = Encoding.ASCII.GetString(unsuppoortedAsciiBytes);
+
+Console.WriteLine($"converting to ascii and back with unsupported cahracter");
+Console.WriteLine($"orginal {unsupportedAsciiString}");
+Console.WriteLine($"coverted {convertedbackfromunsupportedAscii}");
+Console.WriteLine($"orignnial string length {unsupportedAsciiString.Length}");
+Console.WriteLine($"coverted string length {convertedbackfromunsupportedAscii.Length}");
+Console.WriteLine($"    ascii bytes length {unsuppoortedAsciiBytes.Length}");
+
+Console.WriteLine($"string equal: {unsupportedAsciiString == convertedbackfromunsupportedAscii}");
+Console.WriteLine($"firstchar equal: {unsupportedAsciiString[0] == convertedbackfromunsupportedAscii[0]}");
+
 
 
 
