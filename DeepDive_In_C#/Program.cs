@@ -1558,7 +1558,6 @@ abstract class MyBaseClass
 ////// or cares only about the type in a limited way
 //////we can use genrics on classes , interfaces, methods, etc...
 
-///*part 1*/
 //GenricClass<int> myNumbericInstance = new GenricClass<int>();
 //GenricClass<string> mystringInstance = new GenricClass<string>();
 ////GenricClass instancewithouType = new GenricClass(); //so this will not work
@@ -1586,7 +1585,6 @@ abstract class MyBaseClass
 //List<string> stringList = new List<string>();
 
 
-///**the common usage to see in c#
 // * is like i don't really dont care about what type you are as long as
 // * you have a parameter list constructor so i need this contructor on whaterver you givin to me
 // * 
@@ -1692,7 +1690,6 @@ abstract class MyBaseClass
 //    }
 //}
 
-///*part 1 ---------------------------------------*/
 ////so we saw some genric classes and genric interfaces 👇👇
 ////we could also make an implemnetation that specffies the type
 ////so we can make the class not genric but specify the type in the interface
@@ -1932,7 +1929,6 @@ public class SomeEntity : IEntity
 //    double Height { get; }
 //    bool HasFur { get; }
 //}
-///*just small info for me
 // * so this line 👇 (record) done automatically (declares dog, create immutable properties for weight, height, hasfur)
 // * also genrates a constructor that sets those properties, also implements value based equality(Equalt, GetHashcode),
 // * provides Tostring() override and supprots with experssion 
@@ -2037,7 +2033,6 @@ public class SomeEntity : IEntity
 
 //var ValueTuple4 = (1,2,3,4,5,8,6,4, "one", 0.25);
 
-///*let summaries what happend up
 // * - we have gernics in both cases
 // * - the type parameters are for each of the items the tuple will hold
 // * - we know we have refrence vs value types here between both of them
@@ -2048,7 +2043,6 @@ public class SomeEntity : IEntity
 
 
 
-///* wy we use tuples
 // * - returning multiple values from a method
 // * - passing multiple values to a method
 // * - grouping multiple values together
@@ -2174,3 +2168,21 @@ public class SomeEntity : IEntity
 //---------------------------------------------------------------------------
 //here we go agin 
 //lets begin with (encoding strings and bytes)
+
+
+using System.Text;
+
+string HelloWorld = "hello world ";
+byte[] bytesForHelloWoldAscii = Encoding.ASCII.GetBytes(HelloWorld);
+
+string hellowWorldConvertedback  = Encoding.ASCII.GetString(bytesForHelloWoldAscii);
+
+Console.WriteLine($"converting {HelloWorld} to bytes and back with ascii");
+Console.WriteLine($"original : {HelloWorld}");
+Console.WriteLine($"converted {hellowWorldConvertedback}");
+
+Console.WriteLine($"{hellowWorldConvertedback == HelloWorld}");
+
+
+
+
