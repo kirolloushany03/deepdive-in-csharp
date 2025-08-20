@@ -2170,7 +2170,7 @@ public class SomeEntity : IEntity
 //lets begin with (encoding strings and bytes)
 
 
-using System.Text;
+/*using System.Text;
 
 string HelloWorld = "hello world ";
 byte[] bytesForHelloWoldAscii = Encoding.ASCII.GetBytes(HelloWorld);
@@ -2210,7 +2210,7 @@ Console.WriteLine($"ascii bytes length {unsuppoortedAsciiBytes.Length}");
 Console.WriteLine($"Utf-8 bytes length {unsupporedstringasUtf8bytes.Length}");
 
 Console.WriteLine($"string equal: {unsupportedAsciiString == UnsupportedStringAsUtf8}");    
-Console.WriteLine($"firstchar equal: {unsupportedAsciiString[0] == UnsupportedStringAsUtf8[0]}");
+Console.WriteLine($"firstchar equal: {unsupportedAsciiString[0] == UnsupportedStringAsUtf8[0]}");*/
 
 
 
