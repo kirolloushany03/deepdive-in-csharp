@@ -2200,3 +2200,5 @@ Console.WriteLine($"firstchar equal: {unsupportedAsciiString[0] == convertedback
 
 
 
+
+
