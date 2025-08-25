@@ -2277,72 +2277,93 @@ Console.WriteLine($"firstchar equal: {unsupportedAsciiString[0] == UnsupportedSt
 //-------------------part 1------------------------------------------------------
 
 
-using System.Text;
+//using System.Text;
 
-File.WriteAllText("readwritec#.txt", "hello from c#");
-File.WriteAllBytes("readwritec#.txt", Encoding.UTF8.GetBytes("hello from c#"));
+//File.WriteAllText("readwritec#.txt", "hello from c#");
+//File.WriteAllBytes("readwritec#.txt", Encoding.UTF8.GetBytes("hello from c#"));
 
-byte[] someFileBytes = File.ReadAllBytes("readwritec#.txt");
-string someFilestring = File.ReadAllText("readwritec#.txt", Encoding.UTF8);
+//byte[] someFileBytes = File.ReadAllBytes("readwritec#.txt");
+//string someFilestring = File.ReadAllText("readwritec#.txt", Encoding.UTF8);
 
-Console.WriteLine($"this the info read from bytes {Encoding.UTF8.GetString(someFileBytes)}" +
-    $"\nand this from string {someFilestring}");
-//--------------- part 2------------------
+//Console.WriteLine($"this the info read from bytes {Encoding.UTF8.GetString(someFileBytes)}" +
+//    $"\nand this from string {someFilestring}");
+////--------------- part 2------------------
 
-//we can use similar methods to gain access to a stream!
-FileStream filestream = File.Open
-    (
-        "D:\\.net vs\\first try\\DeepDive_In_C#\\DeepDive_In_C#\\readwritec#.txt",
-        FileMode.OpenOrCreate,
-        FileAccess.Write,
-        FileShare.Read
-    );
+////we can use similar methods to gain access to a stream!
+//FileStream filestream = File.Open
+//    (
+//        "D:\\.net vs\\first try\\DeepDive_In_C#\\DeepDive_In_C#\\readwritec#.txt",
+//        FileMode.OpenOrCreate,
+//        FileAccess.Write,
+//        FileShare.Read
+//    );
 
-byte[] buffer = Encoding.UTF8.GetBytes("here we go agin");
-filestream.Write(buffer, 0, buffer.Length);
+//byte[] buffer = Encoding.UTF8.GetBytes("here we go agin");
+//filestream.Write(buffer, 0, buffer.Length);
 
-//we can also use the apais directly on the stream class
-Stream filestreamAsStream = filestream;
-filestream.Seek(0, SeekOrigin.Begin);
-filestreamAsStream.Write(buffer, 0, buffer.Length);
+////we can also use the apais directly on the stream class
+//Stream filestreamAsStream = filestream;
+//filestream.Seek(0, SeekOrigin.Begin);
+//filestreamAsStream.Write(buffer, 0, buffer.Length);
 
-filestream.Close();
-//---------------part 3-------------------
+//filestream.Close();
+////---------------part 3-------------------
 
-//then we can use the very similar api for reading from a file
-FileStream readingStream = File.Open
-    (
-    "readwritec#.txt",
-    FileMode.Open,
-    FileAccess.Read,
-    FileShare.None
-    );
+////then we can use the very similar api for reading from a file
+//FileStream readingStream = File.Open
+//    (
+//    "readwritec#.txt",
+//    FileMode.Open,
+//    FileAccess.Read,
+//    FileShare.None
+//    );
 
-byte[] bufferForereading = new byte[readingStream.Length];
-var bytesReadFromStream = readingStream.Read(bufferForereading, 0, bufferForereading.Length);
-Console.WriteLine(bytesReadFromStream);
+//byte[] bufferForereading = new byte[readingStream.Length];
+//var bytesReadFromStream = readingStream.Read(bufferForereading, 0, bufferForereading.Length);
+//Console.WriteLine(bytesReadFromStream);
 
-//----------------part 4-----------------------
-//but if the file is too large what we do and don't know what is the file size is 
-readingStream.Seek(0, SeekOrigin.Begin );
-StreamReader reader = new StreamReader(readingStream, encoding: Encoding.UTF8);
+////----------------part 4-----------------------
+////but if the file is too large what we do and don't know what is the file size is 
+//readingStream.Seek(0, SeekOrigin.Begin );
+//StreamReader reader = new StreamReader(readingStream, encoding: Encoding.UTF8);
 
-while (!reader.EndOfStream)
-{ 
-    string line  = reader.ReadLine(); //this one variation nof the reader
-    Console.WriteLine(line);
-}
-//------------------part 5-------------------------------
-//also we can make it to read it in chunks
-int chunkSize = 5; //1024
-Console.WriteLine($"\nReading chunks of size {chunkSize} of file...");
-readingStream.Seek(0, SeekOrigin.Begin);
-byte[] bufferforchunking = new byte[chunkSize];
-while (
-    (
-    bytesReadFromStream = readingStream.Read(bufferforchunking, 0, bufferforchunking.Length)
-    )
-    > 0)
+//while (!reader.EndOfStream)
+//{ 
+//    string line  = reader.ReadLine(); //this one variation nof the reader
+//    Console.WriteLine(line);
+//}
+////------------------part 5-------------------------------
+////also we can make it to read it in chunks
+//int chunkSize = 5; //1024
+//Console.WriteLine($"\nReading chunks of size {chunkSize} of file...");
+//readingStream.Seek(0, SeekOrigin.Begin);
+//byte[] bufferforchunking = new byte[chunkSize];
+//while (
+//    (
+//    bytesReadFromStream = readingStream.Read(bufferforchunking, 0, bufferforchunking.Length)
+//    )
+//    > 0)
+//{
+//    Console.WriteLine($"Read {bytesReadFromStream} bytes for this chunk");
+//}
+
+//--------------------------------------------------------------------------------------
+//using & Disposal
+// What is IDisposable ??
+//      is interface we're provided with that allow us to indicate that we have
+//      recources that need to be released
+//when we have to use Disposal ? because c# should be handdel all of this with the gc(garabage collector)
+//      -if we are dealing with some recources don't work with the garbage collector of the c# or not in the c# lang
+//          thing like a third party like sql connection
+
+
+
+
+
+public class MyDisoposable : IDisposable
 {
-    Console.WriteLine($"Read {bytesReadFromStream} bytes for this chunk");
+    public void Dispose()
+    { 
+            //you will do here all what you want to dispose
+    }
 }
