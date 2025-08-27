@@ -2511,7 +2511,6 @@ File.WriteAllText("people.json", rawjson);
 //Console.WriteLine(File.ReadAllText("people.json"));
 //File.ReadAllText("people.json");
 
-
 //now deserlising from json to object
 //we have two way using stream and using string
 
@@ -2538,6 +2537,7 @@ foreach (var person in deserilizedPeopleFromString.People)
 For large files / performance-critical apps → use Stream 🏎️
 For small/medium JSON or when you already have a string → use Text 📝
  */
+
 
 public record Person(string Name, int Age);
 public record PeopleCollection(Person[] People);
