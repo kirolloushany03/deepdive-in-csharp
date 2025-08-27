@@ -559,7 +559,7 @@ Console.WriteLine(recordC);
  *
  * 1. Simplified Property Access:
  *    - Easily extract values without dot notation clutter.
- *    - Example: var (name, age) = person;
+ *    - Example: var (name, age) = Person;
  *
  * 2. LINQ Integration:
  *    - Makes projection and filtering more elegant in Select/Where.
@@ -567,7 +567,7 @@ Console.WriteLine(recordC);
  *
  * 3. Pattern Matching:
  *    - Deconstruct directly in switch expressions or match patterns.
- *    - Example: person switch { ("Alice", 25) => "Matched!", _ => "Default" }
+ *    - Example: Person switch { ("Alice", 25) => "Matched!", _ => "Default" }
  *
  * 4. Clean API/Controller Logic:
  *    - Deconstruct DTOs in minimal APIs or MVC controllers.
@@ -2413,7 +2413,7 @@ Console.WriteLine($"firstchar equal: {unsupportedAsciiString[0] == UnsupportedSt
 //    }
 //}
 
-using System.Diagnostics;
+/*using System.Diagnostics;
 
 using (Process process = new())
 { 
@@ -2443,4 +2443,50 @@ process2.Start();
 string output2 = process2.StandardOutput.ReadToEnd();
 process2.WaitForExit();
 
-Console.WriteLine($"this what we got ffrom the cmd2 -->>>> {output2}");
+Console.WriteLine($"this what we got ffrom the cmd2 -->>>> {output2}");*/
+
+//--------------------------------------------------------------------------------
+//xml and json
+using System.Text.Json;
+using System.Xml;
+
+string rawxml =
+    """
+    <people>
+        <person>
+            <name>kiro here</name>
+            <age>211</age>
+        </person>
+    </people>
+    """;
+
+File.WriteAllText("people.xml", rawxml);
+
+
+XmlDocument xmlDocument = new();
+xmlDocument.Load("people.xml");
+
+XmlNodeList? people = xmlDocument.SelectNodes("/people/person");
+if (people != null)
+{
+    foreach (XmlNode person in people)
+    {
+        Console.WriteLine(person["name"].InnerText);
+        Console.WriteLine(person["age"].InnerText);
+        //so to change both of them in the right format you have to split them and spcifiy them
+        person["name"].InnerText = person["name"].InnerText.ToUpper();
+        person["age"].InnerText = person["age"].InnerText.ToUpper();
+    }
+}
+else
+{
+    Console.WriteLine("no poeple found");
+}
+
+xmlDocument.Save("people2.xml");
+Console.WriteLine("\ncontent of people2\n");
+Console.WriteLine(File.ReadAllText("people2.xml"));
+//-------------------------------------------------------
+
+
+
