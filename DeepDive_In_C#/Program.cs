@@ -2543,3 +2543,5 @@ public record Person(string Name, int Age);
 public record PeopleCollection(Person[] People);
 
 
+
+DoSomethingAfterPressingEnter(Kiro);
