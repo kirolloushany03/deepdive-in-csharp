@@ -20,7 +20,7 @@ internal class Callbacks_Delegates
         {
             Console.WriteLine("helow kiro from delegates from kiro");
         }
-
+        //-------------------------------------------------------------------
 
         //we willuse funk another type of delgates
         //and it return the last type you put in it
@@ -55,7 +55,7 @@ internal class Callbacks_Delegates
         }
 
         DoSomethingAfterPressingEnter(Kiro);
-
+        //-------------------------------------------------------------------
 
         /*
             so when to use it
@@ -83,6 +83,7 @@ internal class Callbacks_Delegates
         Calculate(AddFunction);
         Console.WriteLine("Subtraction exmpale");
         Calculate(SubtractionFunction);
+        //-------------------------------------------------------------------
 
         //making our delgate why to be have more readablity like if go to line like this
         //    int reuslt = calculateMehtodCallback.inovke(); and hover on inovke will said to us arg1 and arg2 
@@ -113,6 +114,7 @@ internal class Callbacks_Delegates
         Console.WriteLine("Subtraction exmpale");
         Calculate2(SubtractionFunction);
 
+        //-------------------------------------------------------------------
         //so also there is on more type is Predicate which is Func<T, bool> so it sth betere for comaprison
         //so it si one Normal Func but return a bool
 
