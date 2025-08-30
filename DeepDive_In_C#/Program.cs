@@ -2599,7 +2599,6 @@ public record PeopleCollection(Person[] People);*/
 //DoSomethingAfterPressingEnter(Kiro);
 
 
-///*
 //    so when to use it
 //when you need to contorl what is excuted after a certain even occurs or condition is met
 //-after  a file is downladed
@@ -2679,21 +2678,27 @@ public record PeopleCollection(Person[] People);*/
 
 
 //var reversed = Extentions.Reverse("Hellwo world");\
-string reversed = "kiro";
+//string reversed = "kiro";
 
-var forwardagain = reversed.Reverse();
-Console.WriteLine(forwardagain);
-
-
+//var forwardagain = reversed.Reverse();
+//Console.WriteLine(forwardagain);
 
 
-public static class Extentions
-{
-    public static string Reverse(this string str)
-    { 
-        var reversedChars = str.Reverse<char>()
-                               .ToArray();
-        var reversed = new string(reversedChars);
-        return reversed;
-    }
-}
+
+
+//public static class Extentions
+//{
+//    public static string Reverse(this string str)
+//    { 
+//        var reversedChars = str.Reverse<char>()
+//                               .ToArray();
+//        var reversed = new string(reversedChars);
+//        return reversed;
+//    }
+//}
+
+
+using DeepDive_In_C_.AdvancingWithMethodsAndFunctions;
+
+
+ExtentionMethods.RunExmples();
