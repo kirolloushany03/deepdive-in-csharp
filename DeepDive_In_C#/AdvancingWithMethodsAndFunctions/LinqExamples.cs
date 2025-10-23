@@ -1,6 +1,6 @@
 ﻿namespace DeepDive_In_C_.AdvancingWithMethodsAndFunctions;
 
-public class Linq
+public class LinqExamples
 {
     public static void RunExmaples()
     {
