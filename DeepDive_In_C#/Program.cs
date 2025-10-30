@@ -3034,5 +3034,37 @@ ThreadContext thread1Context = new(
         Message: "hello from thread 1!"
     );
 
+//passing parameters to the threads
+Thread thread1 = new Thread(new ParameterizedThreadStart(o => 
+{
+    ThreadContext context = (ThreadContext)o;
+
+    Thread.CurrentThread.Name = context.Name;
+    Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
+}));
+
+thread1.Start(thread1Context);
+
+
+//ThreadContext thread2Context = new(
+//        Name:"Thread 2",
+//        Message: "hello from thread 2!"
+//    );
+
+//Thread thread2 = new Thread(new ParameterizedThreadStart(o => 
+//{
+//    ThreadContext context = (ThreadContext)o;
+//    Thread.CurrentThread.Name = context.Name;
+
+//    while (true)
+//    {
+//        Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
+//        Thread.Sleep(1000);
+//    }
+//}));
+
+//thread2.Start(thread2Context);
+
+
 
 record ThreadContext (string Name, string Message);
