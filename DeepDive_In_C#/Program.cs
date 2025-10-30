@@ -2906,110 +2906,133 @@ using System.Runtime.CompilerServices;
 
 //testing
 
-EventSource source = new EventSource();
+//EventSource source = new EventSource();
 
-source.ShowsubscriberCountForDebugging();
-// hook up a new handler with +=
+//source.ShowsubscriberCountForDebugging();
+//// hook up a new handler with +=
 
-source.SourceChanged += Source_SourceChanged;
-source.ShowsubscriberCountForDebugging();
+//source.SourceChanged += Source_SourceChanged;
+//source.ShowsubscriberCountForDebugging();
 
-//this will cause the event to be raised
-source.RaiseEvent("hello yalla\n");
+////this will cause the event to be raised
+//source.RaiseEvent("hello yalla\n");
 
-source.SourceChanged -= Source_SourceChanged;
-source.ShowsubscriberCountForDebugging();
+//source.SourceChanged -= Source_SourceChanged;
+//source.ShowsubscriberCountForDebugging();
 
-source.SourceChanged += Source_SourceChanged1;
-source.SourceChanged += Source_SourceChanged2;
-source.ShowsubscriberCountForDebugging();
+//source.SourceChanged += Source_SourceChanged1;
+//source.SourceChanged += Source_SourceChanged2;
+//source.ShowsubscriberCountForDebugging();
 
-source.RaiseEvent("hellow from kiro");
- 
+//source.RaiseEvent("hellow from kiro");
 
 
-void Source_SourceChanged(object? sender, MessageEventArgs e)
+
+//void Source_SourceChanged(object? sender, MessageEventArgs e)
+//{
+//    Console.WriteLine($"Sender: {sender}");
+//    Console.WriteLine($"message: {e.Message}");
+//}
+//void Source_SourceChanged1(object? sender, MessageEventArgs e)
+//{
+//    Console.WriteLine("this the first handler");
+//    Console.WriteLine($"Sender: {sender}");
+//    Console.WriteLine($"message: {e.Message}");
+//}
+//void Source_SourceChanged2(object? sender, MessageEventArgs e)
+//{
+//    Console.WriteLine("this the secound handler");
+//    Console.WriteLine($"Sender: {sender}");
+//    Console.WriteLine($"message: {e.Message}");
+//}
+
+
+
+//#region preparation(data, raise event)
+
+/////begion  so first we will provide  string message 
+///// so we can able to raise the event
+
+//public class MessageEventArgs : EventArgs
+//{
+//    public string Message { get; }
+//    public MessageEventArgs(string message)
+//    {
+//        Message = message;
+//    }
+//}
+
+///// then having class will abel to raise the event and 
+///// other people will be able to see that event so they can
+///// subscript to it with their own handlers
+
+//public class EventSource
+//{
+//    /// this declares the event and the type of the event
+//    /// but not body outside of this class can raise the event
+//    /// directly by accssing this
+//    ///     event keyword can do couble of things
+//    ///     - able to hook up to the event with your own event handlers
+//    ///     - is have this invoke syntax
+//    ///           and this called raising the event 
+//    public event EventHandler<MessageEventArgs> SourceChanged;
+
+//    public void RaiseEvent(string message)
+//    {
+//        #region evolution
+//        //this solved the nul one
+//        //if (SourceChanged != null)
+//        //{
+//        //    SourceChanged.Invoke(this, new MessageEventArgs(message));
+//        //}
+
+//        //solving that the varaible could be changes
+//        //var handler = SourceChanged;
+//        //if ( handler != null)
+//        //{
+//        //    handler.Invoke(this, new MessageEventArgs(message));
+//        //}
+//        #endregion
+//        //language getting better with null in c#
+//        SourceChanged?.Invoke(this, new MessageEventArgs(message));
+//    }
+
+//    public void ShowsubscriberCountForDebugging()
+//    {
+//        if (SourceChanged == null)
+//        {
+//            Console.WriteLine("DEbug: there are 0 subscribers");
+//        }
+//        else
+//        {
+//            var invocationList = SourceChanged?.GetInvocationList();
+//            Console.WriteLine($"debug there are {invocationList?.Length} subscribers right now");
+//            Console.WriteLine($"{invocationList?.Select(sub => sub.Method)} subscribers now");
+//        }
+//    }
+//}
+
+//#endregion
+
+
+
+
+
+//--------------------------------------------------------------------------------------
+
+
+//thread object in c# allow us to create and manage threads
+//template
+Thread thread = new Thread(() =>
 {
-    Console.WriteLine($"Sender: {sender}");
-    Console.WriteLine($"message: {e.Message}");
-}
-void Source_SourceChanged1(object? sender, MessageEventArgs e)
-{
-    Console.WriteLine("this the first handler");
-    Console.WriteLine($"Sender: {sender}");
-    Console.WriteLine($"message: {e.Message}");
-}
-void Source_SourceChanged2(object? sender, MessageEventArgs e)
-{
-    Console.WriteLine("this the secound handler");
-    Console.WriteLine($"Sender: {sender}");
-    Console.WriteLine($"message: {e.Message}");
-}
+    //do anything
+});
 
 
+ThreadContext thread1Context = new(
+        Name:"Thread 1",
+        Message: "hello from thread 1!"
+    );
 
-#region preparation(data, raise event)
 
-///begion  so first we will provide  string message 
-/// so we can able to raise the event
-
-public class MessageEventArgs : EventArgs
-{
-    public string Message { get; }
-    public MessageEventArgs(string message)
-    {
-        Message = message;
-    }
-}
-
-/// then having class will abel to raise the event and 
-/// other people will be able to see that event so they can
-/// subscript to it with their own handlers
-
-public class EventSource
-{
-    /// this declares the event and the type of the event
-    /// but not body outside of this class can raise the event
-    /// directly by accssing this
-    ///     event keyword can do couble of things
-    ///     - able to hook up to the event with your own event handlers
-    ///     - is have this invoke syntax
-    ///           and this called raising the event 
-    public event EventHandler<MessageEventArgs> SourceChanged;
-
-    public void RaiseEvent(string message)
-    {
-        #region evolution
-        //this solved the nul one
-        //if (SourceChanged != null)
-        //{
-        //    SourceChanged.Invoke(this, new MessageEventArgs(message));
-        //}
-
-        //solving that the varaible could be changes
-        //var handler = SourceChanged;
-        //if ( handler != null)
-        //{
-        //    handler.Invoke(this, new MessageEventArgs(message));
-        //}
-        #endregion
-        //language getting better with null in c#
-        SourceChanged?.Invoke(this, new MessageEventArgs(message));
-    }
-
-    public void ShowsubscriberCountForDebugging()
-    {
-        if (SourceChanged == null)
-        {
-            Console.WriteLine("DEbug: there are 0 subscribers");
-        }
-        else
-        {
-            var invocationList = SourceChanged?.GetInvocationList();
-            Console.WriteLine($"debug there are {invocationList?.Length} subscribers right now");
-            Console.WriteLine($"{invocationList?.Select(sub => sub.Method)} subscribers now");
-        }
-    }
-}
-
-#endregion
+record ThreadContext (string Name, string Message);
