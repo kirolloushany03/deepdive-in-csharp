@@ -3065,6 +3065,29 @@ thread1.Start(thread1Context);
 
 //thread2.Start(thread2Context);
 
+//we can also set a thread to be a backtgoud  thread
+//which will autmatically stop wiht en the main thread stops
 
+ThreadContext thread3Context = new(
+        Name:"Thread 3",
+        Message: "hello from thread 3!"
+    );
+
+Thread thread3 = new Thread(new ParameterizedThreadStart(o => 
+{
+    ThreadContext context = (ThreadContext)o;
+    Thread.CurrentThread.Name = context.Name;
+
+    while (true)
+    {
+        Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
+        Thread.Sleep(1000);
+    }
+}));
+thread3.IsBackground = true;   
+thread3.Start(thread3Context);
+
+Console.WriteLine("press enter to stop thread 3");
+Console.ReadLine();
 
 record ThreadContext (string Name, string Message);
