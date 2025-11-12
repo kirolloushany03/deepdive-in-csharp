@@ -3120,12 +3120,21 @@ worker1.DoWork += (object sender, DoWorkEventArgs e) =>
 
 worker1.WorkerSupportsCancellation = true;
 worker1.RunWorkerAsync();
+
+//so lets go with another worker
+
+BackgroundWorker worker2 = new BackgroundWorker();
+
+worker2.DoWork += (sender, e) =>
     {
-        Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
+    int interations = (int)e.Argument;
+    for (int i = 0; i < interations; i++)
+    {
+        Console.WriteLine($"woker 2 : working inteh backgound on iteration number {i}../../");
         Thread.Sleep(1000);
     }
-}));
-thread3.IsBackground = true;   
+    //instead of adding completed here we can subscript to another event
+};
 thread3.Start(thread3Context);
 
 Console.WriteLine("press enter to stop thread 3");
