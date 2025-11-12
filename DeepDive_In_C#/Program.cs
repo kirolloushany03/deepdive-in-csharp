@@ -3135,9 +3135,14 @@ worker2.DoWork += (sender, e) =>
     }
     //instead of adding completed here we can subscript to another event
 };
-thread3.Start(thread3Context);
 
-Console.WriteLine("press enter to stop thread 3");
+worker2.RunWorkerCompleted += (sender, e) =>
+{
+    Console.WriteLine("woker 2 completed from the RunWorkerCompleted event");
+    worker1.CancelAsync();
+};
+
+worker2.RunWorkerAsync(5);
+
+Console.WriteLine("press enter to exit");
 Console.ReadLine();
-
-record ThreadContext (string Name, string Message);
