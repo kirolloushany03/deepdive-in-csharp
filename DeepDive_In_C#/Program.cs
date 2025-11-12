@@ -3126,7 +3126,7 @@ worker1.RunWorkerAsync();
 BackgroundWorker worker2 = new BackgroundWorker();
 
 worker2.DoWork += (sender, e) =>
-    {
+{
     int interations = (int)e.Argument;
     for (int i = 0; i < interations; i++)
     {
