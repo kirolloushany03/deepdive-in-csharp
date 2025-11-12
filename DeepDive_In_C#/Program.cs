@@ -3023,62 +3023,103 @@ using System.Runtime.CompilerServices;
 
 //thread object in c# allow us to create and manage threads
 //template
-Thread thread = new Thread(() =>
-{
-    //do anything
-});
+//Thread thread = new Thread(() =>
+//{
+//    //do anything
+//});
 
+//#region Thread 1
+////ThreadContext thread1Context = new(
+////        Name:"Thread 1",
+////        Message: "hello from thread 1!"
+////    );
 
-ThreadContext thread1Context = new(
-        Name:"Thread 1",
-        Message: "hello from thread 1!"
-    );
+//////passing parameters to the threads
+////Thread thread1 = new Thread(new ParameterizedThreadStart(o => 
+////{
+////    ThreadContext context = (ThreadContext)o;
 
-//passing parameters to the threads
-Thread thread1 = new Thread(new ParameterizedThreadStart(o => 
-{
-    ThreadContext context = (ThreadContext)o;
+////    Thread.CurrentThread.Name = context.Name;
+////    Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
+////}));
 
-    Thread.CurrentThread.Name = context.Name;
-    Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
-}));
+////thread1.Start(thread1Context);
+//#endregion
+//#region Thread2 Example
+////ThreadContext thread2Context = new(
+////        Name: "Thread 2",
+////        Message: "hello from thread 2!"
+////    );
 
-thread1.Start(thread1Context);
+////Thread thread2 = new Thread(new ParameterizedThreadStart(o =>
+////{
+////    ThreadContext context = (ThreadContext)o;
+////    Thread.CurrentThread.Name = context.Name;
 
+////    while (true)
+////    {
+////        Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
+////        Thread.Sleep(1000);
+////    }
+////}));
 
-//ThreadContext thread2Context = new(
-//        Name:"Thread 2",
-//        Message: "hello from thread 2!"
+////thread2.Start(thread2Context);
+//#endregion
+////we can also set a thread to be a backtgoud  thread
+////which will autmatically stop wiht en the main thread stops
+
+//ThreadContext thread3Context = new(
+//        Name:"Thread 3",
+//        Message: "hello from thread 3!"
 //    );
 
-//Thread thread2 = new Thread(new ParameterizedThreadStart(o => 
+//Thread thread3 = new Thread(new ParameterizedThreadStart(o => 
 //{
 //    ThreadContext context = (ThreadContext)o;
 //    Thread.CurrentThread.Name = context.Name;
-
-//    while (true)
+//    int i = -1 ;
+//    while (i < 30)
 //    {
 //        Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
 //        Thread.Sleep(1000);
+//        i++;
 //    }
 //}));
+////thread3.IsBackground = true;
+//thread3.IsBackground = true;
+//thread3.Start(thread3Context);
 
-//thread2.Start(thread2Context);
+//Console.WriteLine("press enter to stop thread 3");
+//Console.ReadLine();
 
-//we can also set a thread to be a backtgoud  thread
-//which will autmatically stop wiht en the main thread stops
+//record ThreadContext (string Name, string Message);
 
-ThreadContext thread3Context = new(
-        Name:"Thread 3",
-        Message: "hello from thread 3!"
-    );
 
-Thread thread3 = new Thread(new ParameterizedThreadStart(o => 
+//-------------------------------------------------------------------------
+//background worker
+
+/// we can use a Bacgroundworker to run a method in the background
+//creating new Bacgroundworker | used in winform and wpf applications
+using System.ComponentModel;
+
+BackgroundWorker worker1 = new BackgroundWorker();
+
+
+//we can then subscript to the DoWork event
+worker1.DoWork += (object sender, DoWorkEventArgs e) =>
 {
-    ThreadContext context = (ThreadContext)o;
-    Thread.CurrentThread.Name = context.Name;
+    //so cancellationnpending will not work if we sleep so it willl
+    //wait the sleep to fisnh and the stop
+    while (!worker1.CancellationPending)
+    {
+        Console.WriteLine("worker 1 : working in the background");
+        Thread.Sleep(1000);
+    }
+    Console.WriteLine("worker 1 : done the work and it't completed");
+};
 
-    while (true)
+worker1.WorkerSupportsCancellation = true;
+worker1.RunWorkerAsync();
     {
         Console.WriteLine($"{Thread.CurrentThread.Name}: {context.Message}");
         Thread.Sleep(1000);
