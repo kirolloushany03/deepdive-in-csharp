@@ -3170,7 +3170,7 @@ Task task1 = Task.Run(() =>
 });
 
 Task task2 = Task.Run(() =>
-    {
+{
     Console.WriteLine($"Task 2 thred id :{Thread.CurrentThread.ManagedThreadId}");
 });
 
@@ -3187,7 +3187,6 @@ Task task3 = Task.Run(() =>
 Task.WaitAll(task1, task2, task3);
 Console.WriteLine("Tasks 1 ,2,3 have completed ");
 
-BackgroundWorker worker2 = new BackgroundWorker();
 
 
 Task task4 = Task.Run(() =>
@@ -3226,7 +3225,15 @@ AggregateException aggregateException = new(
     new InvalidOperationException("This the first inner exception"),
     new ArgumentException("This tthe secount inner exception."));
 
-worker2.RunWorkerAsync(5);
-
-Console.WriteLine("press enter to exit");
-Console.ReadLine();
+try
+{
+    throw aggregateException;
+}
+catch (AggregateException ex)
+{
+    Console.WriteLine($"{ex.GetType().Name}: {ex.Message}");
+    foreach (Exception innerEx in ex.InnerExceptions)
+    {
+        Console.WriteLine($"\t{innerEx.GetType().Name}: {innerEx.Message}");
+    }
+}
