@@ -3201,10 +3201,30 @@ Task task4 = Task.Run(() =>
 
 task4.Wait();
 Console.WriteLine("Task 4 completed");
+
+/// we can also use the "builder patter"  to cahin thingns together
+/// on task objects:
+Task task5 = Task.Run(() =>
 {
-    Console.WriteLine("woker 2 completed from the RunWorkerCompleted event");
-    worker1.CancelAsync();
-};
+    Console.WriteLine($"Task 5 Thread ID: {Thread.CurrentThread.ManagedThreadId}");
+}).ContinueWith((prevTask) =>
+{
+    Console.WriteLine($"Task 5 continuation Thread Id: {Thread.CurrentThread.ManagedThreadId}");
+    throw new Exception("we intended to do this!#");
+}).ContinueWith((prevTask)=>
+{
+    Console.WriteLine($"Task 5 continuation 2 Thread Id: {Thread.CurrentThread.ManagedThreadId}");
+    Console.WriteLine($"{prevTask.Exception.GetType().Name}: {prevTask.Exception.Message}");
+}, TaskContinuationOptions.OnlyOnFaulted);
+task5.Wait();
+
+
+/// aggregate excption are a way to handle multiple exceptions
+/// that can occur when working with tasks
+AggregateException aggregateException = new(
+    "This is the aggregate exception message",
+    new InvalidOperationException("This the first inner exception"),
+    new ArgumentException("This tthe secount inner exception."));
 
 worker2.RunWorkerAsync(5);
 
