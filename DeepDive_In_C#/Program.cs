@@ -3189,18 +3189,18 @@ Console.WriteLine("Tasks 1 ,2,3 have completed ");
 
 BackgroundWorker worker2 = new BackgroundWorker();
 
-worker2.DoWork += (sender, e) =>
-{
-    int interations = (int)e.Argument;
-    for (int i = 0; i < interations; i++)
-    {
-        Console.WriteLine($"woker 2 : working inteh backgound on iteration number {i}../../");
-        Thread.Sleep(1000);
-    }
-    //instead of adding completed here we can subscript to another event
-};
 
-worker2.RunWorkerCompleted += (sender, e) =>
+Task task4 = Task.Run(() =>
+{
+    for (int i = 0; i < 5; i++)
+    {
+        Console.WriteLine($"Task 4 Thread Id: {Thread.CurrentThread.ManagedThreadId} {i}");
+        Thread.Sleep(500);
+    }
+});
+
+task4.Wait();
+Console.WriteLine("Task 4 completed");
 {
     Console.WriteLine("woker 2 completed from the RunWorkerCompleted event");
     worker1.CancelAsync();
