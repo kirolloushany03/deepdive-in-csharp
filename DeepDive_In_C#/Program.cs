@@ -3100,28 +3100,92 @@ using System.Runtime.CompilerServices;
 
 /// we can use a Bacgroundworker to run a method in the background
 //creating new Bacgroundworker | used in winform and wpf applications
-using System.ComponentModel;
+//using System.ComponentModel;
 
-BackgroundWorker worker1 = new BackgroundWorker();
+//BackgroundWorker worker1 = new BackgroundWorker();
 
 
-//we can then subscript to the DoWork event
-worker1.DoWork += (object sender, DoWorkEventArgs e) =>
+////we can then subscript to the DoWork event
+//worker1.DoWork += (object sender, DoWorkEventArgs e) =>
+//{
+//    //so cancellationnpending will not work if we sleep so it willl
+//    //wait the sleep to fisnh and the stop
+//    while (!worker1.CancellationPending)
+//    {
+//        Console.WriteLine("worker 1 : working in the background");
+//        Thread.Sleep(1000);
+//    }
+//    Console.WriteLine("worker 1 : done the work and it't completed");
+//};
+
+//worker1.WorkerSupportsCancellation = true;
+//worker1.RunWorkerAsync();
+
+////so lets go with another worker
+
+//BackgroundWorker worker2 = new BackgroundWorker();
+
+//worker2.DoWork += (sender, e) =>
+//{
+//    int interations = (int)e.Argument;
+//    for (int i = 0; i < interations; i++)
+//    {
+//        Console.WriteLine($"woker 2 : working inteh backgound on iteration number {i}../../");
+//        Thread.Sleep(1000);
+//    }
+//    //instead of adding completed here we can subscript to another event
+//};
+
+//worker2.RunWorkerCompleted += (sender, e) =>
+//{
+//    Console.WriteLine("woker 2 completed from the RunWorkerCompleted event");
+//    worker1.CancelAsync();
+//};
+
+//worker2.RunWorkerAsync(5);
+
+//Console.WriteLine("press enter to exit");
+//Console.ReadLine();
+
+//----------------------------------------------------------------------
+
+//string[] input = Console.ReadLine().Split(" ");
+//var result = input.ToList();
+
+//result.Reverse();
+
+//Console.WriteLine(string.Join(" ", result));
+
+//------------------------------------------------------------------------
+/// task objects
+/// Tasks in c# allow us to perform asyncronos operations 
+/// using task objects , we can get more conrol over
+/// how we'd like our asynchornous opertions to be executed.
+
+Console.WriteLine($"Main Thread Id: {Thread.CurrentThread.ManagedThreadId}");
+
+Task task1 = Task.Run(() =>
 {
-    //so cancellationnpending will not work if we sleep so it willl
-    //wait the sleep to fisnh and the stop
-    while (!worker1.CancellationPending)
+    Console.WriteLine($"Task 1 thred id :{Thread.CurrentThread.ManagedThreadId}");
+});
+
+Task task2 = Task.Run(() =>
     {
-        Console.WriteLine("worker 1 : working in the background");
+    Console.WriteLine($"Task 2 thred id :{Thread.CurrentThread.ManagedThreadId}");
+});
+
+Task task3 = Task.Run(() =>
+{
+    for (int i = 0; i < 5; i++)
+    {
+        Console.WriteLine($"Task 3 thred id :{Thread.CurrentThread.ManagedThreadId} {i}");
         Thread.Sleep(1000);
     }
-    Console.WriteLine("worker 1 : done the work and it't completed");
-};
+});
 
-worker1.WorkerSupportsCancellation = true;
-worker1.RunWorkerAsync();
 
-//so lets go with another worker
+Task.WaitAll(task1, task2, task3);
+Console.WriteLine("Tasks 1 ,2,3 have completed ");
 
 BackgroundWorker worker2 = new BackgroundWorker();
 
