@@ -3162,7 +3162,7 @@ using System.Runtime.CompilerServices;
 /// using task objects , we can get more conrol over
 /// how we'd like our asynchornous opertions to be executed.
 
-Console.WriteLine($"Main Thread Id: {Thread.CurrentThread.ManagedThreadId}");
+/*Console.WriteLine($"Main Thread Id: {Thread.CurrentThread.ManagedThreadId}");
 
 Task task1 = Task.Run(() =>
 {
@@ -3373,4 +3373,54 @@ Console.WriteLine("finshed waitng LeverageTaskYield....");
 
 #endregion
 
+#region part 4
+/*
+    it is important ot note that once you introduce async/await
+into the call tree you should use it all the way up/down
+lets lookk at twhat happens to our exception handling
+when you mix async and non-async code
+ */
+
+async Task TestCatchingExceptions()
+{
+    Console.WriteLine("TestCatchingExceptions ThisIsNotATask..");
+    await Task.Delay(TimeSpan.FromSeconds(1));
+    Console.WriteLine("Finished dealy inside TestCatchingExceptions...");
+
+    Console.WriteLine("caling async method...");
+    try
+    {
+        await ThisIsATask();
+        // so we can not await this because this method is async but nnot return a Task
+        //await ThisIsNotATask();
+            //ThisIsNotATask();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"caought excption from async method :{ex.Message}");
+    }
+}
+
+
+async Task ThisIsATask()
+{
+    Console.WriteLine("entring ThisIsATask..");
+    await Task.Delay(TimeSpan.FromSeconds(1));
+    Console.WriteLine("Finished dealy inside ThisIsATask...");
+
+    throw new Exception("ThisIsATask has throown an exception");
+}
+async void ThisIsNotATask()
+{
+    Console.WriteLine("entring ThisIsNotATask..");
+    await Task.Delay(TimeSpan.FromSeconds(1));
+    Console.WriteLine("Finished dealy inside ThisIsNotATask...");
+
+    throw new Exception("ThisIsNotATask has throown an exception");
+}
+
+
+
+await TestCatchingExceptions();
+Console.ReadLine();
 #endregion
