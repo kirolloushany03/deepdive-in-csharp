@@ -3289,12 +3289,7 @@ await firstAsyncMethodTask;
 
 #endregion
 
-
-
-#region part3
-/*
- * let's look at this interesting behavior to understand
- * that#region part 2
+#region part 2
 //like our task eexamples we cann run several async methods
 
 async Task<string> ThirdAsyncMethod(TimeSpan timeToWait, string messageToWrite)
@@ -3329,7 +3324,12 @@ Task<string> firsTaskToComplete = await Task.WhenAny(task1, task2, task3);
 
 #endregion
 
-#endregion marking somethig async doesn't just make it 
+#endregion
+
+#region part3
+/*
+ * let's look at this interesting behavior to understand
+ * that marking somethig async doesn't just make it 
  * automatically run assynchronously
  */
 
