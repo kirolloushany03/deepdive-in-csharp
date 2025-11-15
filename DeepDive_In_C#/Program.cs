@@ -2838,6 +2838,7 @@ public record PeopleCollection(Person[] People);*/
 //lazy class
 
 
+using DeepDive_In_C_.AsynchronousParallelAndMultiThreading;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -3241,14 +3242,14 @@ catch (AggregateException ex)
 
 
 //-----------------------------------------------------------------------------------
-/// like using task objects and we can use the aysnc/await keywords to 
+/*/// like using task objects and we can use the aysnc/await keywords to 
 /// structure async code without having to think about it in
 /// terms of objects
 #region part one
-/*
+*//*
     in order to make an async method , we use a new keyword
 and the task object as  the return type 
- */
+ *//*
 
 Console.WriteLine($"main thread {Thread.CurrentThread.ManagedThreadId}");
 
@@ -3258,24 +3259,24 @@ async Task FirstAsyncMethod()
     Console.WriteLine($"done firstasyncMethod {Thread.CurrentThread.ManagedThreadId}");
 };
 
-/*
+*//*
  * if we need to return anything , we use Task<T> the genric version
  * to be abel to pass back data:
- */
+ *//*
 async Task<int> SecoundAsyncMethod()
 {
     await Task.Delay(TimeSpan.FromSeconds(500));
     return 3;
 }
 
-/*
+*//*
     much like the task objects , we can these async methods
     and they'll go off and run but we should track them 
     we can use the await keyword to wait for the async method.
     
     within our conetxt we will not run the code after the await
     until the async method has completed
- */
+ *//*
 #region excute FirstAsyncMethod()
 Console.WriteLine("awaiting FirstAsyncMethod...");
 await FirstAsyncMethod();
@@ -3327,11 +3328,11 @@ Task<string> firsTaskToComplete = await Task.WhenAny(task1, task2, task3);
 #endregion
 
 #region part3
-/*
+*//*
  * let's look at this interesting behavior to understand
  * that marking somethig async doesn't just make it 
  * automatically run assynchronously
- */
+ *//*
 
 async Task NotActuallyAsync()
 {
@@ -3359,11 +3360,11 @@ async Task LeverageTaskYield()
     Console.WriteLine("exiting LeverageTaskYield...");
 }
 
-/*
+*//*
     we can call this method awit it and it will
 at least allow the scheduler to run other tasks 
 and this because of calling yeild
- */
+ *//*
 
 Console.WriteLine("calling LeverageTaskYield...");
 Task leverageTaskYieldTask = LeverageTaskYield();
@@ -3374,12 +3375,12 @@ Console.WriteLine("finshed waitng LeverageTaskYield....");
 #endregion
 
 #region part 4
-/*
+*//*
     it is important ot note that once you introduce async/await
 into the call tree you should use it all the way up/down
 lets lookk at twhat happens to our exception handling
 when you mix async and non-async code
- */
+ *//*
 
 async Task TestCatchingExceptions()
 {
@@ -3423,4 +3424,6 @@ async void ThisIsNotATask()
 
 await TestCatchingExceptions();
 Console.ReadLine();
-#endregion
+#endregion*/
+
+await AsyncAwait.RunExamples();
