@@ -3237,3 +3237,54 @@ catch (AggregateException ex)
         Console.WriteLine($"\t{innerEx.GetType().Name}: {innerEx.Message}");
     }
 }
+*/
+
+
+//-----------------------------------------------------------------------------------
+/// like using task objects and we can use the aysnc/await keywords to 
+/// structure async code without having to think about it in
+/// terms of objects
+#region part one
+/*
+    in order to make an async method , we use a new keyword
+and the task object as  the return type 
+ */
+
+Console.WriteLine($"main thread {Thread.CurrentThread.ManagedThreadId}");
+
+async Task FirstAsyncMethod()
+{
+    await Task.Delay(TimeSpan.FromSeconds(1));
+    Console.WriteLine($"done firstasyncMethod {Thread.CurrentThread.ManagedThreadId}");
+};
+
+/*
+ * if we need to return anything , we use Task<T> the genric version
+ * to be abel to pass back data:
+ */
+async Task<int> SecoundAsyncMethod()
+{
+    await Task.Delay(TimeSpan.FromSeconds(500));
+    return 3;
+}
+
+/*
+    much like the task objects , we can these async methods
+    and they'll go off and run but we should track them 
+    we can use the await keyword to wait for the async method.
+    
+    within our conetxt we will not run the code after the await
+    until the async method has completed
+ */
+#region excute FirstAsyncMethod()
+Console.WriteLine("awaiting FirstAsyncMethod...");
+await FirstAsyncMethod();
+
+//alternatively ...
+Console.WriteLine("awaiting firstasyncmethod again");
+Task firstAsyncMethodTask = FirstAsyncMethod();
+await firstAsyncMethodTask;
+
+#endregion
+
+#endregion
