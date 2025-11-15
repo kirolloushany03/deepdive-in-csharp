@@ -3288,3 +3288,40 @@ await firstAsyncMethodTask;
 #endregion
 
 #endregion
+
+#region part 2
+//like our task eexamples we cann run several async methods
+
+async Task<string> ThirdAsyncMethod(TimeSpan timeToWait, string messageToWrite)
+{
+    await Task.Delay(timeToWait);
+    Console.WriteLine(messageToWrite);
+    return messageToWrite;
+}
+
+//Console.WriteLine("starting 3 async methods");
+
+Task<string> task1 = ThirdAsyncMethod(TimeSpan.FromSeconds(3), "Task 1 has completed");
+Task<string> task2 = ThirdAsyncMethod(TimeSpan.FromSeconds(1), "Task 2 has completed");
+Task<string> task3 = ThirdAsyncMethod(TimeSpan.FromSeconds(2), "Task 3 has completed");
+
+
+#region excuting ThirdAsyncMethod()
+//we can wait for all of them to complete
+
+Console.WriteLine("waiting for 3 async methods ...");
+await Task.WhenAll(task1, task2, task3);
+Console.WriteLine("all 3 async methods have completed");
+
+
+// alternatively we can also wait until any of them completes using 
+//  whenAny()
+// Returns the first Task that completes,
+// regardless of whether it succeeded, failed, or was canceled.
+
+
+Task<string> firsTaskToComplete = await Task.WhenAny(task1, task2, task3);
+
+#endregion
+
+#endregion
