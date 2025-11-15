@@ -3289,7 +3289,12 @@ await firstAsyncMethodTask;
 
 #endregion
 
-#region part 2
+
+
+#region part3
+/*
+ * let's look at this interesting behavior to understand
+ * that#region part 2
 //like our task eexamples we cann run several async methods
 
 async Task<string> ThirdAsyncMethod(TimeSpan timeToWait, string messageToWrite)
@@ -3321,6 +3326,50 @@ Console.WriteLine("all 3 async methods have completed");
 
 
 Task<string> firsTaskToComplete = await Task.WhenAny(task1, task2, task3);
+
+#endregion
+
+#endregion marking somethig async doesn't just make it 
+ * automatically run assynchronously
+ */
+
+async Task NotActuallyAsync()
+{
+    Console.WriteLine("Entering NotActuallyAsync...");
+    Thread.Sleep(1000);
+    Console.WriteLine("Exiting NotActuallyAsync...");
+}
+
+//we can call this method and await it but it will not
+Console.WriteLine("calling NotActuallyAsync...");
+Task notActuallyAsyncTask = NotActuallyAsync();
+Console.WriteLine("awaiting NotActuallyAsync...");
+await notActuallyAsyncTask;
+Console.WriteLine("finsihed await NotActuallyAsync");
+
+Console.WriteLine(string.Empty);
+
+
+async Task LeverageTaskYield()
+{
+    Console.WriteLine("entring LeverageTaskYield...");
+    await Task.Yield();
+    Console.WriteLine("continuing from LeverageTaskYield ...");
+    Thread.Sleep(1000);
+    Console.WriteLine("exiting LeverageTaskYield...");
+}
+
+/*
+    we can call this method awit it and it will
+at least allow the scheduler to run other tasks 
+and this because of calling yeild
+ */
+
+Console.WriteLine("calling LeverageTaskYield...");
+Task leverageTaskYieldTask = LeverageTaskYield();
+Console.WriteLine("awiting LeverageTaskYield...");
+await leverageTaskYieldTask;
+Console.WriteLine("finshed waitng LeverageTaskYield....");
 
 #endregion
 
