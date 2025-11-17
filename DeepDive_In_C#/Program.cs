@@ -3469,3 +3469,21 @@ Console.ReadLine();
 cts.Cancel();
 
 await loopTask;*/
+
+//we can chain cancellation tokens together:
+CancellationTokenSource cts2 = new CancellationTokenSource();
+var cancellationToken2 = cts2.Token;
+var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken2);
+var linkedToken = linkedTokenSource.Token;
+
+Console.WriteLine("using a linked token souce!");
+Console.WriteLine("press enter to cancel the loop");
+Task loopTask = LoopUntilCancelldAsync(linkedToken);
+
+Console.ReadLine();
+cts2.Cancel();
+
+await loopTask;
+
+/// recommneded every time to writing an async awaitabel method that you pass in 
+/// cancellation token
