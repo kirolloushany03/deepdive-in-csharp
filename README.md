@@ -2,7 +2,7 @@
 
 ### Mastering advanced C# concepts hands-on — from OOP & delegates to async programming, based on Dometrain’s "Deep Dive: C#" course.
 
-![C#](https://img.shields.io/badge/C%23-10.0-blueviolet?style=for-the-badge&logo=c-sharp)
+![C#](https://img.shields.io/badge/C%23-14.0-blueviolet?style=for-the-badge&logo=c-sharp)
 ![.NET](https://img.shields.io/badge/.NET-10.0-blue?style=for-the-badge&logo=dotnet)
 ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2025-5C2D91?style=for-the-badge&logo=visual-studio)
 
