@@ -3426,4 +3426,46 @@ await TestCatchingExceptions();
 Console.ReadLine();
 #endregion*/
 
-await AsyncAwait.RunExamples();
+//await AsyncAwait.RunExamples();
+
+//---------------------------------------------------------------------------
+//cancelation  tokens
+
+/// we can use cancellation tokens with our async/await code
+/// to cancel tasks that are running:
+/// we can get a token from a cancellationTokenSource 
+
+CancellationTokenSource cts = new CancellationTokenSource();
+var cancellationToken = cts.Token;
+
+
+async Task LoopUntilCancelldAsync(CancellationToken cancellationToken)
+{ 
+    await Task.Yield();
+    Console.WriteLine("looping unitl Cancelled...");
+
+    ///we can throw exctpion but not recommnded
+    ///cancellationToken.ThrowIfCancellationRequested
+    while (!cancellationToken.IsCancellationRequested)
+    {
+        Console.WriteLine("waiting ...");
+        //await Task.Delay(3000, cancellationToken);\
+        try
+        {
+            await Task.Delay(3000, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            break;
+        }
+    }
+    Console.WriteLine("cancelled");
+}
+
+/*Console.WriteLine("press enter to cancel the loop");
+Task loopTask = LoopUntilCancelldAsync(cancellationToken);
+
+Console.ReadLine();
+cts.Cancel();
+
+await loopTask;*/
